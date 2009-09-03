@@ -1,0 +1,76 @@
+<?php 
+
+/**
+ *  Time-stamp:  <2009-07-02 12:49:10 raskolnikov>
+ *
+ *  @file        enrol.html
+ *  @author      Juan Pedro Bolívar Puente <raskolnikov@es.gnu.org>
+ *  @date        Thu Jul  2 12:48:21 2009
+ *
+ *  Enrolment screen for enrol_idlist.
+ */
+
+/*
+ *  Copyright (C) 2009 Juan Pedro Bolívar Puente
+ *
+ *  This file is part of cvg-moodle.
+ *   
+ *  cvg-moodle is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  cvg-moodle is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+print_box_start('generalbox centerpara');
+echo '<p align="center">';
+ ?>
+      </p>
+
+      <p align="center"><?php if (! empty($this->errormsg)) {formerr($this->errormsg);} ?></p>
+
+      <?php print_string("enrolment_msg", "enrol_idlist") ?>
+
+      <form method="post" action="enrol.php">
+        <table align="center" width="100%">
+          <tr>
+            <td>
+              <input type="hidden" name="id" value="<?php p($course->id) ?>"  />
+              <input type="hidden" name="enrol" value="idlist" />
+              <input type="submit" value="<?php print_string("enrolme") ?>" />
+            </td>
+          </tr>
+        </table>
+      </form>
+      <br />
+
+      <div align="center">
+      <form action="<?php p($CFG->wwwroot)?>/index.php" method="post">
+      <input type="submit" value="<?php print_string("cancel") ?>" />
+      </form>
+      </div>
+
+<?php 
+        print_box_end();
+
+
+    if (isguestuser()) {
+        print_box_start('centerpara');
+        if (empty($CFG->loginhttps)) {
+            $loginurl = $CFG->wwwroot .'/login/index.php';
+        } else {
+            $wwwroot = str_replace('http:','https:', $CFG->wwwroot);
+            $loginurl = $wwwroot .'/login/index.php';
+        }
+        print_single_button($loginurl, null, get_string('login'));
+        print_box_end();
+    }
+?>

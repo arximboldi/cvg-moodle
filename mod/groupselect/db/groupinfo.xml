@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/groupselect/db" VERSION="20090721" COMMENT="XMLDB file for Moodle mod/groupselect"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="groupselect_groupinfo" COMMENT="Extra per group information.">
+      <FIELDS>
+        <FIELD NAME="modid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Group select instance" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="modid" NEXT="maxmembers"/>
+        <FIELD NAME="maxmembers" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Max users in group" PREVIOUS="groupid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="pk" TYPE="primary" FIELDS="modid, groupid" NEXT="groupid_fk"/>
+        <KEY NAME="groupid_fk" TYPE="foreign" FIELDS="groupid" REFTABLE="groups" REFFIELDS="id" PREVIOUS="pk" NEXT="modid_fk"/>
+        <KEY NAME="modid_fk" TYPE="foreign" FIELDS="modid" REFTABLE="groupselect" REFFIELDS="id" PREVIOUS="groupid_fk"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

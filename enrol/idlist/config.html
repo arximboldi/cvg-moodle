@@ -1,0 +1,92 @@
+<?php
+
+/**
+ *  Time-stamp:  <2009-07-05 19:02:56 raskolnikov>
+ *
+ *  @file        config.html
+ *  @author      Juan Pedro Bolívar Puente <raskolnikov@es.gnu.org>
+ *  @date        Thu Jul  2 12:47:02 2009
+ *
+ *  Configuration menu for enrol_idlist.
+ */
+
+/*
+ *  Copyright (C) 2009 Juan Pedro Bolívar Puente
+ *
+ *  This file is part of cvg-moodle.
+ *   
+ *  cvg-moodle is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  cvg-moodle is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+?>
+
+<table cellspacing="0" cellpadding="5" border="0" class="boxaligncenter">
+
+<tr valign="top">
+    <td align="right">enrol_idlist_idattr:</td>
+    <td>
+    <input type="text" size="20" name="enrol_idlist_idattr" value="<?php echo $frm->enrol_idlist_idattr ?>" />
+    </td>
+    <td>
+    <?php  print_string("enrol_idlist_idattr", "enrol_idlist") ?>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td align="right">enrol_idlist_path:</td>
+    <td>
+    <input type="text" size="20" name="enrol_idlist_path" value="<?php echo $frm->enrol_idlist_path ?>" />
+    </td>
+    <td>
+    <?php  print_string("enrol_idlist_path", "enrol_idlist") ?>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td align="right">enrol_idlist_regexp:</td>
+    <td>
+    <input type="text" size="20" name="enrol_idlist_regexp" value="<?php echo $frm->enrol_idlist_regexp ?>" />
+    </td>
+    <td>
+    <?php  print_string("enrol_idlist_regexp", "enrol_idlist") ?>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td align="right">enrol_idlist_strict_check_p:</td>
+    <td>
+<?php
+    $choices = array();
+    $choices['0'] = get_string('no');
+    $choices['1'] = get_string('yes');
+    choose_from_menu ($choices, 'enrol_idlist_strict_check_p', $frm->enrol_idlist_strict_check_p, '');
+?>
+    </td>
+    <td>
+    <?php  print_string("enrol_idlist_strict_check_p", "enrol_idlist") ?>
+    </td>
+</tr>
+
+<tr valign="top">
+    <td align="right">enrol_idlist_strict_hint:</td>
+    <td>
+    <input type="text" size="20" name="enrol_idlist_strict_hint" value="<?php echo $frm->enrol_idlist_strict_hint ?>" />
+    </td>
+    <td>
+    <?php  print_string("enrol_idlist_strict_hint", "enrol_idlist") ?>
+    </td>
+</tr>
+
+</table>
