@@ -1,0 +1,311 @@
+
+/*
+ * Styles for eMargo-Commentbox
+ * based on the Commentpress wordpress plugin
+ * @see http://www.futureofthebook.org/commentpress/
+ */
+
+form {
+	margin:0;
+	padding:0;
+	display:inline;
+}
+
+#cp_commentsTotal {
+	position: absolute;
+	padding-top: 6px;
+	font-size: .75em;
+}
+
+#cp_showAll {
+	float: right;
+	margin-top: 0px;
+}
+
+#newcomment{
+	border: 1px solid #ff0000;
+	display: none;
+	height: 20px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 200px;
+}
+
+#cp_helpIcon {
+	content: "?";
+	float: right;
+	margin-top: 4px;
+}
+
+.cp_commentBody {
+	position: relative;
+	margin-left: 0px;
+}
+
+
+/* CONTAINER FOR COMMENTS	*/
+
+#cp_comments {
+	background-color: #ffffff;
+	border: 1px solid #d5dfe5;
+	font-size: .9em;
+	line-height: 1.35em;
+	margin: 0px;
+	margin-top: 3px;
+	overflow: scroll;
+	overflow-y:scroll;
+	overflow-x: hidden;
+	padding: 10px;
+	position: relative;
+	/* SET VIA MOODLE-OPTIONS:		height: 350px; */
+	/* SET VIA MOODLE-OPTIONS:		width: 275px; */
+}	
+
+#cp_comments h4 {
+	font-size: 1em;
+}
+
+
+/* STYLES FOR COMMENT TEXT */
+
+.comment,.commentReference, .commentAuthor {
+	border-top: 1px solid #d5dfe5;
+	margin: 5px 0 0 0;
+	padding: 5px 0 ;
+}
+
+.comment .title, .comment .title cite, .commentReference, .commentAuthor {
+	vertical-align: middle;
+	font-size: 0.8em;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+
+.subject {
+	font-weight: bold;
+}
+
+.comment .title cite {
+	font-size: 1em;
+}
+
+#cp_comments p, #cp_indexList p {
+	margin: 0;	
+}
+
+.cp_commentMeta {
+	display: block;
+	margin: -1em 0 1em 0;
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #707077;
+}
+
+.cp_replyLink, .cp_goToText, .cp_goToText_noaction {
+	display: block;
+	float: right;
+	padding-right: 5px;
+	text-align: right;	
+	width: 40%;
+	font-size: 0.8em;
+}
+
+.cp_datePosted {
+	font-size: 0.8em;
+	text-align: left;
+}
+
+.author_on_paragraph {
+	font-size: 1.2em;
+	font-weight: normal;
+	text-transform: none;
+}
+
+
+/* STYLES FOR THREADED COMMENTS */
+
+.comment .cp_commentBody .comment { 
+ 	padding-left: 10px;
+}
+
+/* COMMENT AREA: COMMENT OVERVIEW LIST */
+
+#comment_index #cp_comments .commentlist ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#comment_index #cp_comments .commentlist {
+	border-top: 1px solid #d5dfe5;
+	vertical-align: middle;
+	font-size: .85em;
+	color: #505050;
+	letter-spacing: .1em;
+}
+
+#comment_index #cp_comments .commentlist  td{
+	padding: 5px 2px;
+	line-height: 1em;
+	border-bottom: 1px solid #d5dfe5;
+}
+
+#comment_index #cp_comments .commentlist {
+	text-transform: uppercase;
+}
+
+#comment{
+	max-width: 400px;
+	width: 90%;
+}
+
+.commenticons {
+	float:right;
+	display:block;
+	text-align: right;	
+	white-space:nowrap;
+	width: 60px;
+}
+
+
+/* STYLES FOR COMMENTS BY USER */
+
+.cp_indexList, .cp_indexListChild {
+	line-height: 1.4em;
+	position: relative;
+	margin-bottom: 40px;
+}
+
+.indexCommentsList {
+	line-height: 2em;
+	padding-right: 30px;
+}
+
+.cp_indexList p, .cp_indexListChild p {
+}
+
+.commentParentText {
+	padding-left: 20px;
+	color: #808088;
+}
+
+#no_comments_yet{
+ font-weight: bold;
+}
+
+.cp_highlight{
+ background: #D1D5D9;
+ border: 1px dotted #999;
+}
+
+.cp_nohighlight{
+ background: #fff;
+ border: 1px dotted #fff;
+}
+
+h3 {
+	padding:0;
+	margin:0;
+}
+
+#emargobox {
+	position: fixed;
+	top: 100px;
+	right: 0px;
+	padding: 0;
+	/* SET VIA MOODLE-OPTIONS		width: 310px; */
+}
+
+#emargobox_slides {
+	position: fixed;
+	top: 130px;
+	right: 0px;
+	padding: 0;
+	/* SET VIA MOODLE-OPTIONS		width: 310px; */
+}
+
+#comments h3 {
+	padding-left: 15px;
+}
+
+#comment_read, #comment_index, #comment_help {
+	display: none;
+}
+
+#comment_help li, #comment_help p {
+	text-align:justify;
+}
+
+#comment_help ul {
+	margin-left:5px;
+	margin-right:5px;
+	padding-left:10px;
+}
+
+#comment_help ul ul {
+	margin-left:0px;
+	padding-left:20px;
+}
+
+#comment_help h3 {
+	margin-left:0px;
+	padding-left:0px;
+	font-size: 1.2em;
+}
+
+#documentIntro p {
+	padding-right: 40px;
+	line-height: 1.4em;
+}
+
+ol.tocList {
+	line-height: 2em;
+	margin-top: -10px;
+	margin-left: 10px;
+	padding-left: 0px;
+	padding-right: 25px;
+}
+
+ol.tocList li {
+	list-style-type: decimal;
+	color:  #808088;
+}
+
+ol.tocList li a, ol.tocList li a:visited {
+	color: #000;
+}
+
+ol.tocList li a:hover {
+	color: #d00;
+}
+
+#genCommentsList .commentlist {
+	margin-top: 15px;
+}
+#genCommentsList p {
+	line-height: 1.4em;
+}
+#genCommentsForm {
+	margin-top: 15px;
+}
+
+#cp_comments .content {
+	margin-bottom:20px;
+	border-color:#ff9933;
+	padding:7px;
+	background-color: #fff0c1;
+}	
+
+#canceleditingbutton, #editcommentbutton {
+	font-size: .9em;
+}
+
+.sideblock img.userpicture{
+	height:20px;
+	margin:2px 4px 5px 2px;
+	width:20px;
+}
+
+div.title{
+	font-size:1.5em;
+}

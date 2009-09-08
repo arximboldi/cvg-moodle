@@ -1,0 +1,143 @@
+/* $Id: vizcosh_print.css,v 1.1 2006/03/12 18:39:59 skodak Exp $ */
+
+h1, h2, h3, h4, h5, h6 {
+    margin-left: 0px;
+    font-family: "Times New Roman", Times, serif;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+}
+
+.vizcosh_title {
+    margin-left: -40px;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 3em;
+    font-weight: bold;
+    margin-top: 120px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.vizcosh_summary {
+    margin-left: -40px;
+    text-align: center;
+    margin-bottom: 120px;
+}
+
+.vizcosh_chapter_title {
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 1.7em;
+    font-weight: bold;
+
+    border-style: solid;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 1px;
+    border-left-width: 0px;
+
+    margin-left: -40px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+}
+
+.vizcosh_chapter {
+    page-break-before: always;
+}
+
+body {
+    margin-left: 50px;
+    margin-right: 10px;
+    color: #000000;
+    background-color: #FFFFFF;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/* link rewriting for mozilla - collides with filters :-( */
+/*
+a[href^="http://"]:after, a[href^="ftp://"]:after {
+    content: " ["attr(href)"]";
+}
+*/
+
+/* just some hack - ignore user defined <font> */
+font {
+    color: #000000;
+    background-color: #FFFFFF;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/* ===== TOC numbering styles ===== */
+
+/* numbering == NONE */
+.vizcosh_toc_none {
+    page-break-before: always;
+}
+.vizcosh_toc_none ul {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.vizcosh_toc_none ul ul {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.vizcosh_toc_none li {
+    margin-top: 10px;
+    list-style: none;
+}
+.vizcosh_toc_none li li {
+    margin-top: 0px;
+    list-style: none;
+}
+
+/* numbering == NUMBERED */
+.vizcosh_toc_numbered {
+    page-break-before: always;
+}
+.vizcosh_toc_numbered ul {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.vizcosh_toc_numbered ul ul {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.vizcosh_toc_numbered li {
+    margin-top: 10px;
+    list-style: none;
+}
+.vizcosh_toc_numbered li li {
+    margin-top: 0px;
+    list-style: none;
+}
+
+
+div.wrapper
+{ 
+  position: absolute; 
+  left: 50%;
+  margin: 0px 0px 0px -400px; 
+  width: 100%; 
+  min-height: 100%; 
+}
+div.left
+{
+  position: relative;
+  float: left;
+  background-color: #bfbfbf;
+  width: 70%;
+  padding: 10px;
+}
+
+div.right
+{
+  position: relative;
+  float: left;
+  width: 30%;
+  padding: 10px;
+}

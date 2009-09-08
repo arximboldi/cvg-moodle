@@ -1,0 +1,32 @@
+<form name="paragrapheditform" method="post" action="editparagraph.php">
+	<table align="center" cellpadding="5">
+		<tr valign="top">
+			<td valign="top" align="right">
+			<p><strong><?php print_string('content', 'vizcosh'); ?>:</strong></p>
+			<div style="font-size: 0.8em;"> <?php 
+	            helpbutton('writing', get_string('helpwriting'), 'moodle', true, true);
+            echo '<br />';
+            if ($usehtmleditor) {
+               helpbutton('richtext', get_string('helprichtext'), 'moodle', true, true);
+            } else {
+               emoticonhelpbutton('theform', 'text');
+            }
+
+             ?><br /></div></td>
+			<td align="center">
+	        <?php echo print_textarea($usehtmleditor, 20, 60, 630, 400, 'content', $paragraph->content, $course->id); ?>
+	        <br />
+	        <input type="submit" name="addvissubmit" value="<?php print_string('addvis','vizcosh'); ?>" />
+		    </td>
+		</tr>
+	</table>
+	<center>
+	    <input type="submit" name="savesubmit" value="<?php print_string('savechanges'); ?>" />
+	    <input type="reset" value="<?php print_string('revert'); ?>" />
+	</center>
+    <input type="hidden" name="id" value="<?php p($cm->id); ?>" />
+    <input type="hidden" name="orderposition" value="<?php p($paragraph->orderposition); ?>" />
+    <input type="hidden" name="chapterid" value="<?php p($paragraph->chapterid); ?>" />	
+    <input type="hidden" name="paragraphid" value="<?php p($paragraph->id); ?>" />
+    <input type="hidden" name="sesskey" value="<?php echo $USER->sesskey; ?>" />
+</form>

@@ -1,0 +1,130 @@
+<!-- $Id: editorvis.html,v 1.5 2008/02/03 22:32:00 vellaramkalayil Exp $ //-->
+<!--HTML page for editing algorihm visualizations
+included by: editorvis.php
+uses the following variables:
+    from editorvis.php:
+        - $vizalgo: contains the data of the algorithm visualization to insert or edit or delete
+        - $USER
+        - $modus: new, edit or delete
+-->
+
+<form name="chaptereditform" method="post" action="editorvis.php" enctype="multipart/form-data">
+<table align="center" cellpadding="5">
+<tr valign="top">
+    <td align="right">
+        <b><?php print_string("vizalgotitle", "vizcosh") ?>:</b>
+    </td>
+    <td align="left">
+        <input type="text" name="title" size="30" value="<?php if (isset($vizalgo->title)) p($vizalgo->title); ?>">
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <b><?php print_string("vizalgodesc", "vizcosh") ?>:</b>
+    </td>
+    <td align="left">
+        <input type="text" name="description" size="30" value="<?php if (isset($vizalgo->description)) p($vizalgo->description); ?>">
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <b><?php print_string("vizalgoauth", "vizcosh") ?>:</b>
+    </td>
+    <td align="left">
+        <input type="text" name="author" size="30" value="<?php p($USER->firstname);echo " ";p($USER->lastname) ?>" readonly>
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <?php print_string("vizalgotopics", "vizcosh") ?>:
+    </td>
+    <td align="left">
+        <input type="text" name="topics" size="30" value="<?php if (isset($vizalgo->topics)) p($vizalgo->topics); ?>">
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <b><?php print_string("vizalgoformat", "vizcosh") ?>:</b>
+    </td>
+    <td align="left">
+    <?php 
+    $formats = get_records('vizcosh_vizalgo_formats');
+    if ($formats) {
+        echo '<select name="format" size="3">';
+        foreach($formats as $format) {
+            if($vizalgo->format==$format->name){
+                 echo '<option selected>'.$format->name.'</option>';
+            }else{
+                echo '<option>'.$format->name.'</option>';
+            }
+        }
+        echo '</select>';
+   }  
+    ?>    
+        <input type="submit" name="formateditorsubmit" value="Format Editor" />
+        <!--<a title="formatEditor" href="addformat.php">Format Editor</a>-->
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <?php print_string("vizalgofile", "vizcosh") ?>:
+    </td>
+    <td align="left">
+        <?php
+            if(isset($vizalgo->data) && $vizalgo->data!=null){
+                  if (isset($vizalgo->fndata) && $vizalgo->fndata!=null){
+                     echo $vizalgo->fndata;
+                  }
+            }
+        ?>
+        <input type="checkbox" name="deletedata">Delete
+        </br>
+        New File: <input type="file" name="data" size="30"><br>
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <?php print_string("vizalgothumb", "vizcosh") ?>:
+    </td>
+    <td align="left">
+        <?php
+            if(isset($vizalgo->thumbnail) && $vizalgo->thumbnail!=null && strcmp($vizalgo->thumbnail,"default")!=0){
+				if(strcmp($vizalgo->thumbnail,"text")==0){
+        			if(isset($vizalgo->fnthumbnail)){
+                 		echo $vizalgo->fnthumbnail;
+					}else{
+						echo $vizalgo->description;
+				  	}
+			}
+		 	else{
+				echo "<img src='generatethumb.php?vizalgo=".$vizalgo->id."'>";
+			}
+            }else{
+                echo "<img src='./pix/default.gif' width='100' height='100'>";
+            }
+        ?>
+        <input type="radio" name="deletethumb" value="old" checked>Keep
+        <input type="radio" name="deletethumb" value="delete">Delete
+        <br />
+        <input type="radio" name="deletethumb" value="thumbnail">New Thumbnail: <input type="file" name="thumbnail" size="30">
+        <br />
+        <input type="radio" name="deletethumb" value="text">New Text: <input type="text" name="text" size="30" value="">
+        </br>
+        
+    </td>
+</tr>
+</table>
+<center>
+<?php if($modus=='new') {
+        echo '<input type="submit" value="'.get_string("editorcreate","vizcosh").'" onSubmit="check_upload(thumbnail)"/>';
+    }
+    else{
+        echo '<input type="submit" value="'.get_string("editorupdate","vizcosh").'"/>';
+    }
+?>
+</center>
+    <input type="hidden" name="vizalgo"     value="<?php p($vizalgo->id) ?>" />
+    <input type="hidden" name="modus"       value="<?php p($modus) ?>" />
+    <input type="hidden" name="sesskey"     value="<?php echo $USER->sesskey ?>" />
+    <input name="MAX_FILE_SIZE" type="hidden" value="16777216" />
+</form>

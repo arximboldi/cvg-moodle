@@ -1,0 +1,51 @@
+<?php 
+	$strSelectbox = get_string('tocformat_selectbox', 'vizcosh');
+	$strList = get_string('tocformat_list', 'vizcosh');
+?>
+
+
+<form method="post" action="module.php" name="form">
+	<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey; ?>" />
+
+	<table cellpadding="9" cellspacing="0">
+		<tr>
+			<td align="right" valign="top">vizcosh_tocwidth:</td>
+			<td valign="top"><?php
+	        $choices = array('140'=>'140', '160'=>'160', '180'=>'180', '200'=>'200',
+                         '220'=>'220', '240'=>'240', '260'=>'260', '280'=>'280', '300'=>'300');
+        	choose_from_menu ($choices, 'vizcosh_tocwidth', $CFG->vizcosh_tocwidth, '');
+        	?></td>
+			<td valign="top"><?php print_string('tocwidth', 'vizcosh') ?></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">vizcosh_tocformat:</td>
+			<td valign="top"><?php
+	        $choices = array('list' => $strList, 'selectbox' => $strSelectbox);
+        	choose_from_menu ($choices, 'vizcosh_tocformat', $CFG->vizcosh_tocformat, '');
+        	?></td>
+			<td valign="top"><?php print_string('tocformat', 'vizcosh') ?></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">vizcosh_commentboxwidth:</td>
+			<td valign="top"><?php
+	        $choices = array('250'=>'250', '275'=>'275', '300'=>'300', '325'=>'325',
+                         '350'=>'350', '375'=>'375', '400'=>'400', '425'=>'425', '450'=>'450');
+        	choose_from_menu ($choices, 'vizcosh_commentboxwidth', $CFG->vizcosh_commentboxwidth, '');
+        	?></td>
+			<td valign="top"><?php print_string('commentboxwidth', 'vizcosh') ?></td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">vizcosh_commentboxheight:</td>
+			<td valign="top"><?php
+	        $choices = array('250'=>'250', '275'=>'275', '300'=>'300', '325'=>'325',
+                         '350'=>'350', '375'=>'375', '400'=>'400', '425'=>'425', '450'=>'450');
+        	choose_from_menu ($choices, 'vizcosh_commentboxheight', $CFG->vizcosh_commentboxheight, '');
+        	?></td>
+			<td valign="top"><?php print_string('commentboxheight', 'vizcosh') ?></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center"><input type="submit" value="<?php print_string('savechanges') ?>" /></td>
+		</tr>
+	</table>
+
+</form>

@@ -1,0 +1,25 @@
+<form name="chaptereditform" method="post" action="edit.php">
+	<table align="center" cellpadding="5">
+		<tr valign="top">
+			<td align="right"><strong><?php print_string("chaptertitle", "vizcosh") ?>:</strong></td>
+			<td align="left"><input type="text" name="title" size="30" value="<?php p($chapter->title); ?>"></td>
+		</tr>
+
+	</table>
+	<center>
+
+	    <?php
+	        if($chapter->id == -1) {
+            echo '<p><a href="import.php?id=' . $cm->id . '"><img align=absmiddle src="' . $CFG->wwwroot . '/mod/vizcosh/emargo/pix/buttons/html.png" /> ' . get_string('doimport', 'vizcosh') . '</a></p>';
+        }
+    ?>	
+	
+	    <input type="submit" name="savesubmit" value="<?php print_string('savechanges'); ?>" />
+	    <input type="reset" value="<?php print_string('revert'); ?>" />
+
+	</center>
+    <input type="hidden" name="id" value="<?php p($cm->id); ?>" />
+    <input type="hidden" name="pagenum" value="<?php p($chapter->pagenum); ?>" />
+    <input type="hidden" name="chapterid" value="<?php p($chapter->id); ?>" />
+    <input type="hidden" name="sesskey" value="<?php echo $USER->sesskey; ?>" />
+</form>

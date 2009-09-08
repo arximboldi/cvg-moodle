@@ -1,0 +1,31 @@
+<?php
+/**
+ * Start of HTML-template for viewing VizCoSHs
+ **/
+?>
+<!-- Start viewstart -->
+<table id="layout-table" cellpadding="2" cellspacing="0">
+	<tr>
+		<td valign="top">
+			<table border="0" cellspacing="0" width="100%" valign="top"	cellpadding="0">
+				<tr>
+					<td style="width:100px; vertical-align:bottom;" nowrap="nowrap" align="left"><?php echo $printvizcosh . $printchapter . $generateimscp; ?></td>
+					<td align="center"><?php echo $toc; ?></td>
+					<td style="width:100px; vertical-align:bottom;" nowrap="nowrap" align="right"><?php echo $chnavigation; ?></td>
+				</tr>
+			</table>
+		</td>
+	<?php if (!$vizcosh->disableemargo) { ?>
+		<td rowspan="2" style="width:<?php echo $CFG->vizcosh_commentboxwidth; ?>px;" valign="top">
+			<div id="emargobox" style="width:<?php echo $CFG->vizcosh_commentboxwidth; ?>px;">
+			<?php echo $rightcolumn; ?>
+			</div>
+		</td>
+	<?php } else { ?>
+		<td rowspan="2" style="width:1px;"></td>
+	<?php }?>
+	</tr>
+	<tr>
+		<!-- Start main column -->
+		<td valign="top">
+<!-- End viewstart -->

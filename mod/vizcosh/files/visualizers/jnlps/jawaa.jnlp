@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for JAWAA Applet -->
+<jnlp
+  codebase="<JNLP-PATH>"
+  href="<JNLP-FILENAME>">
+  <information>
+    <title>JAWAA Applet</title>
+    <vendor>JAWAA</vendor>
+    <description>JAWAA Applet</description>
+    <description kind="short">JAWAA Applet</description>
+    <offline-allowed/>
+  </information>
+  <security>
+	<all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.4+"/>
+    <jar href="<JAR-PATH>/jawaa.jar"/>
+  </resources>
+  <applet-desc documentbase="." name="JawaaGui" main-class="jawaa.app.JawaaGui" width="600" height="300">
+  	<param name="animLoc" value="<DATA-PATHFILENAME>">
+  </applet-desc>
+</jnlp>
