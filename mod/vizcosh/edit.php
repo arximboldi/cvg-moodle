@@ -134,8 +134,10 @@ if (!$chapter) {
 //and fill the form with them
 if (isset ($_SESSION['temp_edit_form'])) {
     $temp = $_SESSION['temp_edit_form'];
-    $chapter->title = $temp->title;
-
+    if ($temp->title)
+      $chapter->title = $temp->title;
+    else
+      $chapter->title = '';
     //if a vizalgo to add was selected
 	/**
     if(isset($sel_vizalgo)){
