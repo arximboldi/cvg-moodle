@@ -2,9 +2,10 @@
 
 	* ChangeLog: Started changelog file.
 
-	* addvis.php, addvis.html, db.xml, editorvis.php, editorvis.html:
-	Changed the way author and format are stored in the visualizations
-	table so they refer to the primary key instead to a volatile and
-	non-unique name. This broke the search functionality.
+	* addvis.php, createjnlp.php, install.xml, editorvis.php,
+	editorvis.html: Changed the way author and format are stored in
+	the visualizations table so they refer to the primary key instead
+	to a volatile and non-unique name. This broke the search
+	functionality.
 
 	* editorvis.php: Code cleanup. Added translation extensions.
