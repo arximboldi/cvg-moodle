@@ -131,8 +131,8 @@
         <FIELD NAME="format" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="this specifies the format of the data file (which contains the algorithm visualization)" PREVIOUS="fndata" NEXT="thumbnail"/>
         <FIELD NAME="thumbnail" TYPE="binary" LENGTH="small" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="icon used to represent the algorithm visualization" PREVIOUS="format" NEXT="fnthumbnail"/>
         <FIELD NAME="fnthumbnail" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="this stores the filename of the thumbnail" PREVIOUS="thumbnail" NEXT="topics"/>
-        <FIELD NAME="topics" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="topics this algorithm visualization belongs to (for search function especially)" PREVIOUS="fnthumbnail" NEXT="jnlp"/>
-        <FIELD NAME="jnlp" TYPE="binary" LENGTH="medium" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="this field contains the jnlp-file which will be used to start the vizalgo" PREVIOUS="topics"/>
+        <FIELD NAME="topics" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="topics this algorithm visualization belongs to (for search function especially)" PREVIOUS="fnthumbnail" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="this specifies the course this vizalgo belongs to." PREVIOUS="topics"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="primary key of the table, please edit me"/>

@@ -16,7 +16,7 @@
       </td>
       <td align="left">
         <input type="text" name="title" size="30" 
-	       value="<?php if (isset($vizalgo->title)) p($vizalgo->title);?>">
+	       value="<?php if (isset($vizalgo->title)) p($vizalgo->title);?>"/>
       </td>
     </tr>
     <tr valign="top">
@@ -25,7 +25,7 @@
       </td>
       <td align="left">
         <input type="text" name="description" size="30"
-	       value="<?php if (isset($vizalgo->description)) p($vizalgo->description); ?>">
+	       value="<?php if (isset($vizalgo->description)) p($vizalgo->description); ?>"/>
       </td>
     </tr>
     <tr valign="top">
@@ -34,7 +34,7 @@
       </td>
       <td align="left">
         <input type="text" name="author_full_name" size="30"
-	       value="<?php p($USER->firstname);echo " ";p($USER->lastname) ?>" readonly>
+	       value="<?php p($USER->firstname);echo " ";p($USER->lastname) ?>" readonly/>
       </td>
     </tr>
     <tr valign="top">
@@ -43,7 +43,7 @@
       </td>
       <td align="left">
         <input type="text" name="topics" size="30"
-	       value="<?php if (isset($vizalgo->topics)) p($vizalgo->topics); ?>">
+	       value="<?php if (isset($vizalgo->topics)) p($vizalgo->topics); ?>" />
       </td>
     </tr>
     <tr valign="top">
@@ -53,15 +53,17 @@
       <td align="left">
 	<?php 
 	  $formats = get_records('vizcosh_vizalgo_formats');
-	  if ($formats) {
-	    echo '<select name="format" size="3">';
-	    foreach($formats as $format) {
-	    $selected = $vizalgo->format == $format->id ? 'selected' : '';
-	    echo "<option $selected value='$format->id'>$format->name</option>";
+	  if ($formats)
+	    {
+	      echo '<select name="format" size="3">';
+	      foreach ($formats as $format)
+	        {
+	          $selected = $vizalgo->format == $format->id ? 'selected' : '';
+	          echo "<option $selected value='$format->id'>$format->name</option>";
+	        }
+	      echo '</select>';
 	    }
-	    echo '</select>';
-	  }
-	  ?>    
+	    ?>    
         <input type="submit" name="formateditorsubmit" value="Format Editor" />
         <!--<a title="formatEditor" href="addformat.php">Format Editor</a>-->
       </td>
@@ -72,63 +74,69 @@
       </td>
       <td align="left">
         <?php
-            if(isset($vizalgo->data) && $vizalgo->data!=null){
-	      if (isset($vizalgo->fndata) && $vizalgo->fndata!=null){
-		echo $vizalgo->fndata;
-	      }
-            }
+            if (isset($vizalgo->data) && $vizalgo->data!=null &&
+		isset($vizalgo->fndata) && $vizalgo->fndata!=null)
+		  echo $vizalgo->fndata;
         ?>
         <input type="checkbox" name="deletedata">Delete
-      </br>
-      New File: <input type="file" name="data" size="30"><br>
-    </td>
-  </tr>
-  <tr valign="top">
-    <td align="right">
-      <?php print_string("vizalgothumb", "vizcosh") ?>:
-    </td>
-    <td align="left">
-      <?php
-            if(isset($vizalgo->thumbnail) && $vizalgo->thumbnail!=null && strcmp($vizalgo->thumbnail,"default")!=0){
-	      if(strcmp($vizalgo->thumbnail,"text")==0){
-		if(isset($vizalgo->fnthumbnail)){
+	<br/>
+	New File: <input type="file" name="data" size="30">
+	<br/>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td align="right">
+	<?php print_string("vizalgothumb", "vizcosh") ?>:
+      </td>
+      <td align="left">
+	<?php
+	    if (isset ($vizalgo->thumbnail) &&
+		strcmp ($vizalgo->thumbnail, "text") == 0)
+	      {
+		if (isset ($vizalgo->fnthumbnail))
 		  echo $vizalgo->fnthumbnail;
-		}else{
+		else
 		  echo $vizalgo->description;
-		}
 	      }
-	      else{
-		echo "<img src='generatethumb.php?vizalgo=".$vizalgo->id."'>";
+	    else
+	      {
+		echo '<img width=100 src="dl_thumb.php?id=' .
+		  (isset ($vizalgo->id) ? $vizalgo->id : -1) .
+		  '">';
 	      }
-            }else{
-	      echo "<img src='./pix/default.gif' width='100' height='100'>";
-            }
-      ?>
-      <input type="radio" name="deletethumb" value="old" checked>Keep
-      <input type="radio" name="deletethumb" value="delete">Delete
-      <br />
-      <input type="radio" name="deletethumb" value="thumbnail">New Thumbnail: <input type="file" name="thumbnail" size="30">
-      <br />
-      <input type="radio" name="deletethumb" value="text">New Text: <input type="text" name="text" size="30" value="">
-    </br>
-    
-  </td>
-</tr>
-</table>
-<center>
-  <?php if($modus=='new') {
-    echo '<input type="submit" value="'.get_string("editorcreate","vizcosh").'" onSubmit="check_upload(thumbnail)"/>';
-    }
-	    else{
-            echo '<input type="submit" value="'.get_string("editorupdate","vizcosh").'"/>';
-	    }
-  ?>
-</center>
+	?>
+	<br/>
+	<input type="radio" name="deletethumb" value="old" checked>Keep
+	<br/>
+	<input type="radio" name="deletethumb" value="delete">Delete
+	<br/>
+	<input type="radio" name="deletethumb" value="thumbnail">New Thumbnail: <input type="file" name="thumbnail" size="30">
+	<br/>
+	<input type="radio" name="deletethumb" value="text">New Text: <input type="text" name="text" size="30" value="">
+	<br/>    
+      </td>
+    </tr>
+  </table>
+  <center>
+    <?php
+	    if ($modus=='new')
+	      {
+		echo '<input type="submit" value="'
+		.get_string ("editorcreate","vizcosh").
+		'" onSubmit="check_upload (thumbnail)"/>';
+	      }
+	    else
+	      {
+		echo '<input type="submit" value="'
+		  .get_string ("editorupdate","vizcosh")
+		  .'"/>';
+	      }
+    ?>
+  </center>
 
-<input type="hidden" name="author"      value="<?php p($USER->id) ?>" />
-<input type="hidden" name="vizalgo"     value="<?php p($vizalgo->id) ?>" />
-<input type="hidden" name="modus"       value="<?php p($modus) ?>" />
-<input type="hidden" name="sesskey"     value="<?php echo $USER->sesskey ?>" />
-<input name="MAX_FILE_SIZE" type="hidden" value="16777216" />
-
+  <input type="hidden" name="author"      value="<?php p($USER->id) ?>" />
+  <input type="hidden" name="vizalgo"     value="<?php p($vizalgo->id) ?>" />
+  <input type="hidden" name="modus"       value="<?php p($modus) ?>" />
+  <input type="hidden" name="sesskey"     value="<?php echo $USER->sesskey ?>" />
+  <input name="MAX_FILE_SIZE" type="hidden" value="16777216" />
 </form>

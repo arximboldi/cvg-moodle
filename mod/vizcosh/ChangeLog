@@ -1,3 +1,15 @@
+2009-09-11  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* editorvis.php, generatethumb.php: Major code cleanup. No longer
+	using temporary files.
+
+	* dl_thumb.php, dl_jnlp.php, dl_data.php: Substitute openjnlp.php,
+	createjnlp.php and no longer require any temporary files.
+
+	* *: Some other cleanup changes all around the code.
+
+	* install.xml: Added a course field in the vizalgos tab.
+
 2009-09-09  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* ChangeLog: Started changelog file.
