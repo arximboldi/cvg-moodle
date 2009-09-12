@@ -1,14 +1,14 @@
 <!--$Id: edit.php,v 2.6 2008/02/03 22:32:00 vellaramkalayil Exp $-->
-<!-- Editing VizCoSH Chapters
-     Fill and Print form for editing chapter
-     or
-     Save submitted data (new or edited chapter) to database
+   <!-- Editing VizCoSH Chapters
+   Fill and Print form for editing chapter
+   or
+   Save submitted data (new or edited chapter) to database
      or
      Redirect to "Add Algorithm Visualization" (addvis.php)
--->
-<?PHP
+     -->
+     <?PHP
 
-require_once ('../../config.php');
+     require_once ('../../config.php');
 require_once ('lib.php');
 
 $id = required_param('id', PARAM_INT); // Course Module ID
@@ -147,7 +147,7 @@ if (isset ($_SESSION['temp_edit_form'])) {
   
   //if a vizalgo to add was selected
   //Todo
-  if(isset($sel_vizalgo)){
+  if(isset($sel_vizalgo) && empty ($_REQUEST['cancel_submit'])){
     //read the vizalgo from database
     $vizalgo = get_record('vizcosh_vizalgos', 'id', $sel_vizalgo);
     //if vizalgo contains its own thumbnail, read that picture from database and insert it as a link (to jnlp-file)

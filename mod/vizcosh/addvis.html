@@ -1,88 +1,84 @@
 <!--$Id: addvis.php,v 2.2 2008/01/18 16:01:00 vellaramkalayil Exp $ -->
 <!-- HTML for Listing/Searching Algorithm Visualizations from/in DB
-included by: addvis.php
-uses the following variables:
-    from addvis.php:
-        - $tab : specifies whether list tab or search tab shall be displayed
-        - $table : contains the vizalgos which shall be listed (search results)
-        - $cm->id and $chapter->id : current course module und chapter ids
+     included by: addvis.php
+     uses the following variables:
+     from addvis.php:
+     - $tab : specifies whether list tab or search tab shall be displayed
+     - $table : contains the vizalgos which shall be listed (search results)
+     - $cm->id and $chapter->id : current course module und chapter ids
 -->
 <?php
+/*
+ * LIST VIEW
+ */
 if ($tab == 'list') {
 ?>
- <form method='get' action='editparagraph.php'>
-<?php 
+<form method='get' action='editparagraph.php'>
+  <?php 
     print_table($table);
-?>
-    <input type="hidden" name="id" value="<?php p($cm->id); ?>"/>
-    <input type="hidden" name="chapterid" value="<?php p($chapter->id); ?>"/>
-    <input type="hidden" name="paragraphid" value="<?php p($paragraphid); ?>"/>    
-    <input type="hidden" name="orderposition" value="<?php p($orderposition); ?>"/>    
-    <input type="hidden" name="add" value="1"/>
-    </br>
-    <table align="center"><tr>
-    <td>
-    <input type="submit" value="Add" />
-    </td>
-    </tr></table>
-  </form>
+  ?>
+  <input type="hidden" name="id" value="<?php p($cm->id); ?>"/>
+  <input type="hidden" name="chapterid" value="<?php p($chapter->id); ?>"/>
+  <input type="hidden" name="paragraphid" value="<?php p($paragraphid); ?>"/>    
+  <input type="hidden" name="orderposition" value="<?php p($orderposition); ?>"/>    
+  <input type="hidden" name="add" value="1"/>
+  <br/>
+  <table align="center">
+    <tr>
+      <td>
+	<input type="submit" name="add" value="<?php print_string ('add')?>" />
+      </td>
+      <td>
+	<input type="submit" name="cancel_submit" value="<?php print_string ('cancel')?>" />
+      </td>
+    </tr>
+  </table>
+</form>
+
 <?php
 }
+/*
+ * SEARCH VIEW
+ */
 if ($tab == 'search') {
 ?>
 <form method='get' action='addvis.php'>
-<table align="center" cellpadding="5">
-<tr valign="top">
-    <td>
-        <?php print_string("vizalgotitle", "vizcosh"); ?>:
-    </td>
-    <td>
-        <input type="text" name="search_title" size="30">
-    </td>
-</tr>
-<tr valign="top">
-    <td>
-        <?php print_string("vizalgodesc", "vizcosh"); ?>:
-    </td>
-    <td>
-        <input type="text" name="search_description" size="30">
-    </td>
-</tr>
-<tr valign="top">
-    <td>
-       <?php print_string("vizalgoauth", "vizcosh"); ?>:
-    </td>
-    <td>
-        <input type="text" name="search_author" size="30">
-    </td>
-</tr>
-<tr valign="top">
-    <td>
-        <?php print_string("vizalgotopics", "vizcosh"); ?>:
-    </td>
-    <td>
-        <input type="text" name="search_topics" size="30">
-    </td>
-</tr>
-<tr>
-<td><?php print_string("vizalgosort", "vizcosh"); ?></td>
-<td><select id="search_sort" name="search_sort" >
-   <option value="title"><?php print_string("vizalgotitle", "vizcosh"); ?></option>
-   <option value="description"><?php print_string("vizalgodesc", "vizcosh"); ?></option>
-   <option value="author"><?php print_string("vizalgoauth", "vizcosh"); ?></option>
-   <option value="topics"><?php print_string("vizalgotopics", "vizcosh"); ?></option>
-</select>
-</td>
-</tr>
-<tr>
-<td><td>
-<td>
-<input type="hidden" name="tab" value="list">
-<input type="submit" value="<?php print_string("search","vizcosh"); ?>"/>
-<input type="reset" value="<?php print_string("reset","vizcosh"); ?>"/>
-</td>
-</tr>
-</table>
+  <table align="center" cellpadding="5">
+    <tr valign="top">
+      <td><?php print_string("vizalgotitle", "vizcosh"); ?>:</td>
+      <td><input type="text" name="search_title" size="30"/></td>
+    </tr>
+    <tr valign="top">
+      <td><?php print_string("vizalgodesc", "vizcosh"); ?>:</td>
+      <td><input type="text" name="search_description" size="30"/></td>
+    </tr>
+    <tr valign="top">
+      <td><?php print_string("vizalgoauth", "vizcosh"); ?>:</td>
+      <td><input type="text" name="search_author" size="30"/></td>
+    </tr>
+    <tr valign="top">
+      <td><?php print_string("vizalgotopics", "vizcosh"); ?>:</td>
+      <td><input type="text" name="search_topics" size="30"/></td>
+    </tr>
+    <tr>
+      <td><?php print_string("vizalgosort", "vizcosh"); ?></td>
+      <td>
+	<select id="search_sort" name="search_sort">
+	  <option value="title"><?php print_string("vizalgotitle", "vizcosh"); ?></option>
+	  <option value="description"><?php print_string("vizalgodesc", "vizcosh"); ?></option>
+	  <option value="author"><?php print_string("vizalgoauth", "vizcosh"); ?></option>
+	  <option value="topics"><?php print_string("vizalgotopics", "vizcosh"); ?></option>
+	</select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<input type="hidden" name="tab" value="list"/>
+	<input type="submit" value="<?php print_string("search","vizcosh"); ?>"/>
+	<input type="reset" value="<?php print_string("reset","vizcosh"); ?>"/>
+      </td>
+    </tr>
+  </table>
 </form>
 <?php
 }

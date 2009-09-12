@@ -63,6 +63,9 @@ if (isset ($vizalgoid) && $vizalgoid != -1)
 $errorurl1 = 'editorvis.php?vizalgo=' . $vizalgoid . '&modus=' . $modus;
 $errorurl2 = 'addvis.php?tab=list';
 
+if (isset ($_REQUEST['cancel_submit']))
+  redirect ($errorurl2);
+
 // =========================================================================
 // security checks END
 // =========================================================================

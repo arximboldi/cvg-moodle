@@ -1,3 +1,13 @@
+2009-09-12  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* addvis.html, editorvis.html: Fixed xhtml output. Added a cancel button.
+
+	* editorvis.php, editparagraph.php: Added cancel button behaviour.
+
+	* addvis.php:
+		Fixed search functionality.
+		Now correctly hides other courses visualizations.
+
 2009-09-11  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* editorvis.php, generatethumb.php: Major code cleanup. No longer

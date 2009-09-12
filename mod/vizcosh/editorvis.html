@@ -8,7 +8,8 @@
     - $modus: new, edit or delete
 -->
 
-<form name="chaptereditform" method="post" action="editorvis.php" enctype="multipart/form-data">
+<form name="chaptereditform" method="post" 
+      action="editorvis.php" enctype="multipart/form-data">
   <table align="center" cellpadding="5">
     <tr valign="top">
       <td align="right">
@@ -25,7 +26,8 @@
       </td>
       <td align="left">
         <input type="text" name="description" size="30"
-	       value="<?php if (isset($vizalgo->description)) p($vizalgo->description); ?>"/>
+	       value="<?php
+	       if (isset($vizalgo->description)) p($vizalgo->description); ?>"/>
       </td>
     </tr>
     <tr valign="top">
@@ -65,7 +67,6 @@
 	    }
 	    ?>    
         <input type="submit" name="formateditorsubmit" value="Format Editor" />
-        <!--<a title="formatEditor" href="addformat.php">Format Editor</a>-->
       </td>
     </tr>
     <tr valign="top">
@@ -76,11 +77,14 @@
         <?php
             if (isset($vizalgo->data) && $vizalgo->data!=null &&
 		isset($vizalgo->fndata) && $vizalgo->fndata!=null)
-		  echo $vizalgo->fndata;
+	      echo $vizalgo->fndata;
         ?>
-        <input type="checkbox" name="deletedata">Delete
+	
+	<?php print_string ('new_file', 'vizcosh') ?>:
+	<input type="file" name="data" size="30">
 	<br/>
-	New File: <input type="file" name="data" size="30">
+	<input type="checkbox" name="deletedata">
+	<?php print_string ('delete') ?>
 	<br/>
       </td>
     </tr>
@@ -121,16 +125,18 @@
     <?php
 	    if ($modus=='new')
 	      {
-		echo '<input type="submit" value="'
+		echo '<input type="submit" name="accept" value="'
 		.get_string ("editorcreate","vizcosh").
 		'" onSubmit="check_upload (thumbnail)"/>';
 	      }
 	    else
 	      {
-		echo '<input type="submit" value="'
+		echo '<input type="submit" name="accept_submit" value="'
 		  .get_string ("editorupdate","vizcosh")
 		  .'"/>';
 	      }
+	    echo '<input type="submit" name="cancel_submit" value="'
+	    .get_string ("cancel"). '"/>';
     ?>
   </center>
 
