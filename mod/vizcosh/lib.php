@@ -19,6 +19,7 @@ if (!isset($CFG->vizcosh_commentboxheight)) {
   set_config("vizcosh_commentboxheight", '425');  // default commentbox height
 }
 
+// Library of functions and constants for module 'vizcosh' --------------------
 
 function vizcosh_get_numbering_types()
 {
@@ -26,7 +27,6 @@ function vizcosh_get_numbering_types()
 		NUM_NUMBERS    => get_string('numbering1', 'vizcosh') );
 }
 
-// Library of functions and constants for module 'vizcosh'
 
 /**
  * Not used yet.
@@ -37,6 +37,79 @@ function vizcosh_get_file_area ($courseid, $vizid)
   return $CFG->datadir .'/'. $courseid .'/vizcosh' . $vizid;
 }
 
+
+/**
+ * Splits content into paragraphs. Note that empty chapters are deleted.
+ */
+function vizcosh_split_paragraphs ($content)
+{
+  return preg_split ('/(\s*<\s*[bB][rR]\s*\/?\s*>\s*){2,}/',
+		     $content, -1, PREG_SPLIT_NO_EMPTY);
+}
+
+
+/**
+ * Deletes a paragraph from the data base.
+ */
+function vizcosh_delete_paragraph ($paragraph, $justedit = false)
+{
+  if (!$justedit)
+    {
+      #perform real deletions for teachers
+      #Delete paragraph
+      if (!delete_records ('vizcosh_paragraphs',
+			   'id', $paragraph->id))
+	error (get_string ('db_error', 'vizcosh'));
+      
+      #Delete comments for this paragraph
+      if (!delete_records('vizcosh_comments',
+			  'paragraph', $paragraph->id,
+			  'chapter', $paragraph->chapterid))
+	error (get_string ('db_error', 'vizcosh'));
+      
+      #Delete comment read status for this paragraph
+      if (!delete_records ('vizcosh_commentread',
+			   'paragraphid', $paragraph->id,
+			   'chapterid', $paragraph->chapterid))
+	error (get_string ('db_error', 'vizcosh'));
+      
+      #Delete markings for this paragraph
+      if (!delete_records ('vizcosh_markings',
+			   'paragraphid', $paragraph->id,
+			   'chapter', $paragraph->chapterid))
+	error (get_string ('db_error', 'vizcosh'));
+      
+      #Delete questionmarks for this paragraph
+      if (!delete_records ('vizcosh_questionmarks',
+			   'paragraph', $paragraph->id,
+			   'chapter', $paragraph->chapterid))
+	error (get_string ('db_error', 'vizcosh'));
+      
+      #Delete bookmarks for this paragraph
+      if (!delete_records ('vizcosh_bookmarks',
+			   'paragraph', $paragraph->id,
+			   'chapter', $paragraph->chapterid)) 
+	error (get_string ('db_error', 'vizcosh'));
+      
+    }
+  else
+    {
+      #authors in group emargo aren't allowed to really delete items
+      if ($paragraph)
+	{
+	  $paragraph->content = "";
+	  
+	  //save to database
+	  if (!update_record ('vizcosh_paragraphs', $paragraph))
+	    error (get_string ('db_error', 'vizcosh'));
+	}
+    }
+}
+
+
+/**
+ * Checks for authorithation in file sending pages.
+ */
 function vizcosh_file_send_prepare ($vizalgoid, $auth = true)
 {
   $vizalgo = get_record ('vizcosh_vizalgos', 'id', $vizalgoid);
@@ -53,8 +126,68 @@ function vizcosh_file_send_prepare ($vizalgoid, $auth = true)
   return $vizalgo;
 }
 
+function vizcosh_search_vizalgos ($courseid = null,
+				  $search_title = '', $search_desc = '',
+				  $search_auth = '', $search_topics = '',
+				  $search_sort = '')
+{
+  global $COURSE, $CFG;
+
+  if (empty ($courseid))
+    $courseid = $COURSE->id;
+  
+  $select_columns = "A.*";
+  $select_cond = "A.course = $courseid";
+  $select_tables = "{$CFG->prefix}vizcosh_vizalgos AS A";
+  $select_user = false;
+  
+  if (isset ($search_title) && $search_title != "")
+    $select_cond .= " AND A.title " . sql_ilike() . " '%$search_title%'";
+  if (isset ($search_desc) && $search_desc != "")
+    $select_cond .=" AND A.description " . sql_ilike() . " '%$search_desc%'";
+  if (isset ($search_auth) && $search_auth != "")
+    {
+      $select_cond .= " AND A.author = U.id AND " .
+	sql_concat ('U.firstname', "' '", 'U.lastname') .
+	sql_ilike() . " '%$search_auth%'";
+      $select_user = true;
+    }
+  if (isset ($search_topics) && $search_topics != "")
+    $select_cond .= " AND A.topics " . sql_ilike() . " '%$search_topics%'";
+  
+  //for sorting
+  if (isset ($search_sort))
+    {
+      switch ($search_sort)
+	{
+	case "title":
+	  $select_order = "A.title"; break;
+	case "description":
+	  $select_order = "A.description"; break;
+	case "author":
+	  $select_user = true;
+	  $select_order = sql_concat ('U.firstname', "' '", 'U.lastname'); break;
+	case "topics":
+	  $select_order = "A.topics"; break;
+	default: break;
+	}
+    }
+
+  if ($select_user)
+    $select_tables .= ", {$CFG->prefix}user as U";
+  
+  // search the database using the previously created select-statement
+  $select_cmd =
+    "SELECT $select_columns FROM $select_tables " .
+    "WHERE $select_cond " .
+    (isset ($select_order) ? "ORDER BY $select_order" : "");
+  $vizalgos = get_records_sql ($select_cmd);
+
+  return $vizalgos;
+}
+
 /**
- * Vizcosh generate JNLP
+ * Vizcosh generate JNLP for a given algorithm visualization.
  */
 function vizcosh_generate_jnlp ($viz)
 {
@@ -101,6 +234,7 @@ function vizcosh_generate_jnlp ($viz)
   return $jnlp_text;
 }
 
+
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -121,6 +255,7 @@ function vizcosh_add_instance($vizcosh)
   }
   return insert_record('vizcosh', $vizcosh);
 }
+
 
 /**
  * Given an object containing all the necessary data,
@@ -144,6 +279,7 @@ function vizcosh_update_instance($vizcosh)
 
   return update_record('vizcosh', $vizcosh);
 }
+
 
 /**
  * Given an ID of an instance of this module,
@@ -188,6 +324,7 @@ function vizcosh_get_types()
   return $types;
 }
 
+
 /**
  * Return a small object with summary information about what a
  * user has done with a given particular instance of this module
@@ -201,6 +338,7 @@ function vizcosh_user_outline($course, $user, $mod, $vizcosh)
   return $return;
 }
 
+
 /**
  * Print a detailed representation of what a  user has done with
  * a given particular instance of this module, for user activity reports.
@@ -209,6 +347,7 @@ function vizcosh_user_complete($course, $user, $mod, $vizcosh)
 {
   return true;
 }
+
 
 /**
  * Given a course and a time, this module should find recent activity
@@ -221,6 +360,7 @@ function vizcosh_print_recent_activity($course, $isteacher, $timestart)
   return false;  //  true if anything was printed, otherwise false
 }
 
+
 /**
  * Function to be run periodically according to the moodle cron
  * This function searches for things that need to be done, such
@@ -232,6 +372,7 @@ function vizcosh_cron ()
   return true;
 }
 
+
 /**
  * Must return an array of grades for a given instance of this module,
  * indexed by user. It also returns a maximum allowed grade.
@@ -240,6 +381,7 @@ function vizcosh_grades($vizcoshid)
 {
   return NULL;
 }
+
 
 /*
  * Must return an array of user records (all data) who are participants
@@ -251,6 +393,7 @@ function vizcosh_get_participants($vizcoshid)
 {
   return false;
 }
+
 
 /*
  * This function returns if a scale is being used by one vizcosh
@@ -270,6 +413,7 @@ function vizcosh_scale_used ($vizcoshid,$scaleid)
 
   return $return;
 }
+
 
 /**
  * prints all set messages
@@ -295,6 +439,7 @@ function vizcosh_print_messages()
   return true;
 }
 
+
 function vizcosh_blocks_have_content($vizcosh, $pageblocks, $column)
 {
   global $CFG, $PAGE;
@@ -308,10 +453,6 @@ function vizcosh_blocks_have_content($vizcosh, $pageblocks, $column)
   return false;
 }
 
-
-//////////////////////////////////////////////////////////////////////////////////////
-// Any other vizcosh functions go here.  Each of them must have a name that
-// starts with vizcosh_
 
 /**
  * check chapter ordering and make sure subchapter is not first in vizcosh
@@ -368,6 +509,7 @@ function vizcosh_edit_button($id, $courseid, $chapterid)
     return '';
   }
 }
+
 
 /**
  * general function for logging to table
@@ -470,6 +612,7 @@ function vizcosh_read_chapter($base, $ref)
   }
   return $chapter;
 }
+
 
 /**
  * relink images and relative links

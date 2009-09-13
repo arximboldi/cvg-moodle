@@ -38,26 +38,26 @@ if (isset ($_SESSION['temp_edit_form']))
   }
 else
   {
-    error (get_string ('permission_denied', 'vizcosh'));
+    error (get_string ('wrong_parameter', 'vizcosh'));
   }
 
 if (!$cm = get_coursemodule_from_id('vizcosh', $id))
-  error (get_string ('wrong_cm_id', 'vizcosh'));
+  error (get_string ('wrong_parameter', 'vizcosh'));
 
 if (!$course = get_record ('course', 'id', $cm->course))
-  error (get_string ('wrong_course_id', 'vizcosh'));
+  error (get_string ('wrong_parameter', 'vizcosh'));
 
 $context = get_context_instance (CONTEXT_MODULE, $cm->id);
 require_capability ('moodle/course:manageactivities', $context);
 
 if (!$vizcosh = get_record ('vizcosh', 'id', $cm->instance))
-  error (get_string ('wrong_cm_id', 'vizcosh'));
+  error (get_string ('wrong_parameter', 'vizcosh'));
 
 $chapter = get_record('vizcosh_chapters', 'id', $chapterid);
 
 //check all variables
 if ($chapter && $chapter->vizcoshid != $vizcosh->id)
-  error (get_string ('wrong_chapter_id', 'vizcosh'));
+  error (get_string ('wrong_parameter', 'vizcosh'));
 
 //these two session variables were possibly set to identify a
 //particular vizcosh selected for editing or inserting they can be
@@ -97,64 +97,11 @@ if ($tab == 'list')
 			  "href='editorvis.php?vizalgo=-1&modus=new'>".
 			  "<img src='pix/add.gif' class='iconbig'  alt='New' /></a>");
 
-    $table->align = array ('left',
-			   'left',
-			   'center',
-			   'center',
-			   'center',
-			   'center'
-			   );
+    $table->align = array ('left', 'left', 'center', 'center', 'center', 'center');
     
-    //create select-statement using user inputs from search-page for
-    //querying the database following fields can be searched: title,
-    //description, author and topics
-
-    $select_columns = "A.*";
-    $select_cond = "A.course = {$COURSE->id}";
-    $select_tables = "{$CFG->prefix}vizcosh_vizalgos AS A";
-    $select_user = false;
-    
-    if (isset ($search_title) && $search_title != "")
-      $select_cond .= " AND A.title " . sql_ilike() . " '%$search_title%'";
-    if (isset ($search_desc) && $search_desc != "")
-      $select_cond .=" AND A.description " . sql_ilike() . " '%$search_desc%'";
-    if (isset ($search_auth) && $search_auth != "")
-      {
-     	$select_cond .= " AND A.author = U.id AND " .
-	  sql_concat ('U.firstname', "' '", 'U.lastname') .
-	  sql_ilike() . " '%$search_auth%'";
-	$select_user = true;
-      }
-    if (isset ($search_topics) && $search_topics != "")
-      $select_cond .= " AND A.topics " . sql_ilike() . " '%$search_topics%'";
-    
-    //for sorting
-    if (isset ($search_sort))
-      {
-	switch ($search_sort)
-	  {
-	  case "title":
-	    $select_order = "A.title"; break;
-	  case "description":
-	    $select_order = "A.description"; break;
-	  case "author":
-	    $select_user = true;
-	    $select_order = sql_concat ('U.firstname', "' '", 'U.lastname'); break;
-	  case "topics":
-	    $select_order = "A.topics"; break;
-	  default: break;
-	  }
-      }
-
-    if ($select_user)
-	$select_tables .= ", {$CFG->prefix}user as U";
-    
-    //search the database using the previously created select-statement
-    $select_cmd =
-      "SELECT $select_columns FROM $select_tables " .
-      "WHERE $select_cond " .
-      (isset ($select_order) ? "ORDER BY $select_order" : "");
-    $vizalgos = get_records_sql ($select_cmd);
+    $vizalgos = vizcosh_search_vizalgos ($COURSE->id, $search_title,
+					 $search_desc, $search_auth,
+					 $search_topics, $search_sort);
     
     //fill the table with the data received from the database
     if ($vizalgos)

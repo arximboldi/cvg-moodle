@@ -23,7 +23,7 @@ if (isset ($_SESSION['temp_edit_form']))
   }
 else
   {
-    error (get_string ('session_var_error', 'vizcosh'));
+    error (get_string ('wrong_parameter', 'vizcosh'));
   }
 
 $vizalgoid = required_param('vizalgo', PARAM_INT);
@@ -40,20 +40,17 @@ require_login();
 $_SESSION['editor_vizalgoid'] = $vizalgoid;
 $_SESSION['editor_modus'] = $modus;
 
-if (!$cm = get_coursemodule_from_id('vizcosh', $id)) {
-  error(get_string ('session_var_error', 'vizcosh'));
-}
+if (!$cm = get_coursemodule_from_id('vizcosh', $id))
+  error (get_string ('wrong_parameter', 'vizcosh'));
 
-if (!$course = get_record('course', 'id', $cm->course)) {
-  error(get_string ('session_var_error', 'vizcosh'));
-}
+if (!$course = get_record('course', 'id', $cm->course))
+  error (get_string ('wrong_parameter', 'vizcosh'));
 
 $context = get_context_instance(CONTEXT_MODULE, $cm->id);
 require_capability('moodle/course:manageactivities', $context);
 
-if (!$vizcosh = get_record('vizcosh', 'id', $cm->instance)) {
-  error('Course module is incorrect');
-}
+if (!$vizcosh = get_record('vizcosh', 'id', $cm->instance))
+  error (get_string ('wrong_paramter'));
 
 // get algorithm visualization from database
 if (isset ($vizalgoid) && $vizalgoid != -1)
@@ -100,7 +97,7 @@ if (($form = data_submitted ()) && confirm_sesskey ())
 	!isset ($form->format) ||
 	$form->format == null)
       {
-	error(get_string('edit_algo_missing_field', 'vizcosh'), $errorurl1);
+	error(get_string('missing_field', 'vizcosh'), $errorurl1);
       }
     //if form was filled correctly: create/edit $vizalgo object to store the user inputs
     //required fields: title, description, author, date, format
@@ -231,25 +228,26 @@ if (($form = data_submitted ()) && confirm_sesskey ())
     // =================================
 
     // if user wanted to update existing algorithm visualization
-    if ($modus == 'edit' && $vizalgo) {
-      $vizalgo->course = $COURSE->id;
-      if (!update_record ('vizcosh_vizalgos', $vizalgo))
-	{
-	  error (get_string ('viz_db_error', 'vizcosh'), $errorurl2);
+    if ($modus == 'edit' && $vizalgo)
+      {
+	$vizalgo->course = $COURSE->id;
+	if (!update_record ('vizcosh_vizalgos', $vizalgo))
+	  {
+	    error (get_string ('db_error', 'vizcosh'), $errorurl2);
 	}
-      else
-	{
-	  add_to_log($course->id, 'vizcosh', 'update visualization', '', $vizalgo->title);
-	  redirect("addvis.php?tab=list");
-	}
-    } 
+	else
+	  {
+	    add_to_log($course->id, 'vizcosh', 'update visualization', '', $vizalgo->title);
+	    redirect("addvis.php?tab=list");
+	  }
+      } 
     //if user wanted to insert new algorithm visualization
     else if ($modus == 'new' && $vizalgo)
       {
 	$vizalgo->course = $COURSE->id;
 	if (!$vizalgo->id = insert_record ('vizcosh_vizalgos', $vizalgo))
 	  {
-	    error (get_string ('viz_db_error', 'vizcosh'), $errorurl2);
+	    error (get_string ('db_error', 'vizcosh'), $errorurl2);
 	  }
 	else
 	  {

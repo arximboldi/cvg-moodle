@@ -1,6 +1,17 @@
+2009-09-13  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* editparagraph.php: Added automatic paragraph breaking support.
+
+	* lib.php (vizcosh_search_vizalgos): Factored out algorithm
+	visualization search.
+
+	* *: Mayor code clean-up. Substituted hard-coded text strings by
+	proper Moodle translatable strings.
+	
 2009-09-12  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
-	* addvis.html, editorvis.html: Fixed xhtml output. Added a cancel button.
+	* addvis.html, editorvis.html: Fixed xhtml output. Added a cancel
+	button.
 
 	* editorvis.php, editparagraph.php: Added cancel button behaviour.
 
