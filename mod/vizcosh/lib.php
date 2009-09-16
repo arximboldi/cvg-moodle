@@ -51,7 +51,7 @@ function vizcosh_post_process_content ($content)
     {
 
       $replace_with=
-	'<br/>\n\n'.
+	'<br/>'.
 	'<div id="xaal_animation_'. $lastid .'" class="jsxaal" '.
 	'style="width:640px;height:480px;margin:0 auto;"></div>'.
 	'<script type="text/javascript">'.
@@ -63,7 +63,7 @@ function vizcosh_post_process_content ($content)
 	'"dl_xaal.php?id=' . $COURSE->id. '&file=$1"' .
 	'});'.
 	'});'.
-	'</script></br>\n\n';
+	'</script></br>';
 
       
       $content = preg_replace ('/\[\s*xaal\s+([\w\.\,\-\ ]*)\s*\]/',
