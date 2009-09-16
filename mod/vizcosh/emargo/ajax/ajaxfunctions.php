@@ -4,6 +4,8 @@
  * @author: Andreas Kothe
  */ 
 
+require_once ($CFG->dirroot . '/mod/vizcosh/lib.php');
+
 $emargoroot = $CFG->wwwroot . '/mod/vizcosh/emargo/';
 
 /**
@@ -25,7 +27,10 @@ function ajax_Marker_loadMarkedText() {
 	}
 		
 	#Load all paragraphs of the $chapterID into a recordset
-	if (!$all_paragraphs_array = get_recordset_select('vizcosh_paragraphs', 'vizcoshid = '.$vizcosh->id.' AND chapterid = '.$chapterid, 'orderposition')){
+	if (!$all_paragraphs_array = get_recordset_select('vizcosh_paragraphs',
+							  'vizcoshid = '.$vizcosh->id.
+							  ' AND chapterid = '.$chapterid,
+							  'orderposition')){
 		ajaxReply(601, 'Error reading eMargo chapters.');
 	}
 	else{
@@ -51,7 +56,8 @@ function ajax_Marker_loadMarkedText() {
 		}
 	}		
 	
-	ajaxReply(201,'Data Follows', array('content' => $markedContent));
+	ajaxReply(201,'Data Follows', array('content' =>
+					    vizcosh_post_process_content ($markedContent)));
 }
 
 /**
@@ -83,7 +89,7 @@ function ajax_Marker_loadUnmarkedText() {
 		}
 		else{
 			//contains no paragraphs
-			$Content = '<div id="contentblock_0">Dieses Kapitel enth&auml;lt noch keinen Inhalt. ';
+		  $Content = '<div id="contentblock_0">'.get_string ('empty_chapter', 'vizcosh');
 			if (isset($USER->editing) && ($USER->editing==1)){
 				$Content .= '<br><br><a title="'.get_string('edit').'" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.'&paragraphid=-1&orderposition=1"><img src="pix/add.gif" height="11" class="iconsmall" alt="'.get_string('edit').'" />Absatz hinzuf&uuml;gen</a>';
 			}
@@ -93,7 +99,8 @@ function ajax_Marker_loadUnmarkedText() {
 		}
 	}
 	
-	ajaxReply(201,'Data Follows', array('content' => $Content));
+	ajaxReply(201,'Data Follows', array('content' =>
+					    vizcosh_post_process_content ($Content)));
 
 }
 

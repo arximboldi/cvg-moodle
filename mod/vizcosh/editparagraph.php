@@ -76,89 +76,95 @@ if (($form = data_submitted ()) && confirm_sesskey ())
 	redirect ("addvis.php?tab=list");
 	die;
       }
-
-    $full_contents =
-      isset ($form->break_paragraphs) ?
-      vizcosh_split_paragraphs ($form->content) :
-      array ($form->content);
-    
-    //if "Save"-Button was hit: Save new or edited chapter to database
-    //if editing existing paragraph we save the first paragraph on it
-    if ($paragraph)
+    else if (isset ($_REQUEST['addxaalsubmit']))
       {
-	// Deleting a paragraph is a too dangerous operation (destroys
-	// comments) so we'd rather require the user to do it explicitly
-	if (count ($full_contents) > 0)
-	  $paragraph->content = array_shift ($full_contents);
-	else
-	  $paragraph->content = '';
-	
-	#$paragraph->timemodified = time();
-	
-	//save to database
-	if (!update_record ('vizcosh_paragraphs', $paragraph))
-	  error (get_string ('db_error', 'vizcosh'), $errorurl);
-	
-	add_to_log($course->id, 'course', 'update mod',
-		   '../mod/vizcosh/view.php?id=' . $cm->id,
-		   'vizcosh ' . $vizcosh->id);
-	add_to_log($course->id, 'vizcosh', 'update',
-		       'view.php?id=' . $cm->id . '&chapterid=' . $paragraph->id,
-		   $vizcosh->id, $cm->id);
+	$paragraph->content = $form->content . "<br/>[xaal $form->xaalxml]";
       }
-    
-    //if there are remaining paragraphs we add them after this one
-    // Renumber following paragraphs
-    if (count ($full_contents) > 0)
-      {
-	$para_count = count ($full_contents);
-	$new_orderposition = $orderposition + 1;
+    else
+      {  
+	$full_contents =
+	  isset ($form->break_paragraphs) ?
+	  vizcosh_split_paragraphs ($form->content) :
+	  array ($form->content);
 	
-	$paragraphs = get_records_select ('vizcosh_paragraphs',
-					  "vizcoshid = $vizcosh->id AND ".
-					  "chapterid = $chapterid AND ".
-					  "orderposition >= $new_orderposition",
-					  'chapterid, orderposition',
-					  'id, orderposition');
-	
-	if ($paragraphs)
+	//if "Save"-Button was hit: Save new or edited chapter to database
+	//if editing existing paragraph we save the first paragraph on it
+	if ($paragraph)
 	  {
-	    foreach ($paragraphs as $par)
-	      {
-		$par->orderposition = $par->orderposition + $para_count;
-		if (!update_record ('vizcosh_paragraphs', $par))
-		  error (get_string ('db_error', 'vicosh'), $errorurl);
-	      }
+	    // Deleting a paragraph is a too dangerous operation (destroys
+	    // comments) so we'd rather require the user to do it explicitly
+	    if (count ($full_contents) > 0)
+	      $paragraph->content = array_shift ($full_contents);
+	    else
+	      $paragraph->content = '';
+	    
+	    #$paragraph->timemodified = time();
+	    
+	    //save to database
+	    if (!update_record ('vizcosh_paragraphs', $paragraph))
+	      error (get_string ('db_error', 'vizcosh'), $errorurl);
+	    
+	    add_to_log($course->id, 'course', 'update mod',
+		       '../mod/vizcosh/view.php?id=' . $cm->id,
+		       'vizcosh ' . $vizcosh->id);
+	    add_to_log($course->id, 'vizcosh', 'update',
+		       'view.php?id=' . $cm->id . '&chapterid=' . $paragraph->id,
+		       $vizcosh->id, $cm->id);
 	  }
-	else
-	  die;
-      }
-    
-    $order_delta = 0;
-    foreach ($full_contents as $par_content)
-      {
-	$order_delta ++;
 	
-	$paragraph->vizcoshid = $vizcosh->id;
-	$paragraph->chapterid = $chapterid;
-	$paragraph->orderposition = $form->orderposition + $order_delta; 
-	$paragraph->content = $par_content;
+	//if there are remaining paragraphs we add them after this one
+	// Renumber following paragraphs
+	if (count ($full_contents) > 0)
+	  {
+	    $para_count = count ($full_contents);
+	    $new_orderposition = $orderposition + 1;
+	    
+	    $paragraphs = get_records_select ('vizcosh_paragraphs',
+					      "vizcoshid = $vizcosh->id AND ".
+					      "chapterid = $chapterid AND ".
+					      "orderposition >= $new_orderposition",
+					      'chapterid, orderposition',
+					      'id, orderposition');
+	    
+	    if ($paragraphs)
+	      {
+		foreach ($paragraphs as $par)
+		  {
+		    $par->orderposition = $par->orderposition + $para_count;
+		    if (!update_record ('vizcosh_paragraphs', $par))
+		      error (get_string ('db_error', 'vicosh'), $errorurl);
+		  }
+	      }
+	    else
+	      die;
+	  }
 	
-	#$chapter->timecreated = time();
-	#$chapter->timemodified = $chapter->timecreated;
-	
-	//save to database
-	if (!$paragraph->id = insert_record('vizcosh_paragraphs', $paragraph))
-	  error (get_string ('db_error', 'vizcosh'), $errorurl);
-	
-	add_to_log ($course->id, 'course', 'update mod',
-		    '../mod/vizcosh/view.php?id=' . $cm->id, 'vizcosh ' . $vizcosh->id);
-      }
+	$order_delta = 0;
+	foreach ($full_contents as $par_content)
+	  {
+	    $order_delta ++;
+	    
+	    $paragraph->vizcoshid = $vizcosh->id;
+	    $paragraph->chapterid = $chapterid;
+	    $paragraph->orderposition = $form->orderposition + $order_delta; 
+	    $paragraph->content = $par_content;
+	    
+	    #$chapter->timecreated = time();
+	    #$chapter->timemodified = $chapter->timecreated;
+	    
+	    //save to database
+	    if (!$paragraph->id = insert_record('vizcosh_paragraphs', $paragraph))
+	      error (get_string ('db_error', 'vizcosh'), $errorurl);
+	    
+	    add_to_log ($course->id, 'course', 'update mod',
+			'../mod/vizcosh/view.php?id=' . $cm->id, 'vizcosh ' . $vizcosh->id);
+	  }
 
-    #vizcosh_check_structure($vizcosh->id);
-    //show new or edited paragraph
-    redirect ("view.php?id=$cm->id&chapterid=$paragraph->chapterid#$paragraph->id");
-    die;
+	#vizcosh_check_structure($vizcosh->id);
+	//show new or edited paragraph
+	redirect ("view.php?id=$cm->id&chapterid=$paragraph->chapterid#$paragraph->id");
+	die;
+      }
   }
 
 // =========================================================================
@@ -232,6 +238,9 @@ $strvizcosh  = get_string ('modulename', 'vizcosh');
 $strvizcoshs = get_string ('modulenameplural', 'vizcosh');
 $stredit     = get_string ('editchapter','vizcosh');
 $pageheading = get_string ('editingchapter', 'vizcosh');
+
+// TODO: parametrize
+vizcosh_print_jsxaal_header ();
 
 //print header bar
 print_header ("$course->shortname: $vizcosh->name", 

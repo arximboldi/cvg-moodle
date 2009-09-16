@@ -1,3 +1,14 @@
+2009-09-16  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* emargo/ajax/ajaxfunctions.php, lib.php, view.php,
+	editorparagraph.php: Added XAAL support using Jsxaal. Only work
+	with the comment functionality disabled.
+
+	* jsxaal/*: Imported Jsxaal sources.
+
+	* *: Some more cleanup and changing hardcoded strings by
+	translatable ones.
+
 2009-09-13  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* editparagraph.php: Added automatic paragraph breaking support.
@@ -7,7 +18,7 @@
 
 	* *: Mayor code clean-up. Substituted hard-coded text strings by
 	proper Moodle translatable strings.
-	
+
 2009-09-12  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* addvis.html, editorvis.html: Fixed xhtml output. Added a cancel

@@ -153,6 +153,7 @@ $PAGE->print_header ($course->shortname . ': ' . $vizcosh->name .
 		     ' (' . $chapter->title . ' )', '',
 		     $chapter, $emargometadata);
 
+
 // prepare chapter navigation icons
 $previd = null;
 $nextid = null;
@@ -316,6 +317,8 @@ ob_start();
 }
 ob_end_clean();
 
+vizcosh_print_jsxaal_header ();
+
 require ('view.html');
 
 // construct title
@@ -386,7 +389,7 @@ else
     $nocleanoption = new object();
     $nocleanoption->noclean = true;
     echo '<div class="vizcosh_content">';
-    echo format_text($content, FORMAT_HTML, $nocleanoption, $course->id);
+    echo format_text(vizcosh_post_process_content ($content), FORMAT_HTML, $nocleanoption, $course->id);
     echo '</div>';
 }
 
@@ -401,6 +404,6 @@ if (!$vizcosh->disableemargo)
   {
     require_once ($CFG->dirroot . '/mod/vizcosh/emargo/emargofooter.php');
   }
-
+//echo '<script>jQuery.noConflict();</script>';
 print_footer($course);
 ?>

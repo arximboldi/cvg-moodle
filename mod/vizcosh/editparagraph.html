@@ -17,7 +17,8 @@
 	</div>
       </td>
       <td align="center">
-	<?php echo print_textarea($usehtmleditor, 20, 60, 630, 400, 'content', $paragraph->content, $course->id); ?>
+	<?php echo print_textarea($usehtmleditor,
+	20, 60, 630, 400, 'content', $paragraph->content, $course->id); ?>
 	<br />
       </td>
     </tr>
@@ -28,11 +29,39 @@
 	<?php print_string ('break_parapgraphs', 'vizcosh')?>
       </td>
     </tr>
+
+    <tr valign="top" align="right">
+      <td>
+	<p><strong><?php print_string('jnlp_av', 'vizcosh'); ?>:</strong></p>
+      </td>
+      <td align="left">
+	<input type="submit" name="addvissubmit" value="<?php print_string('addvis','vizcosh'); ?>" />
+      </td>
+    </tr>
+
+    <tr valign="top" align="right">
+      <td >
+	<p><strong><?php print_string('xaal_av', 'vizcosh'); ?>:</strong></p>
+      </td>
+      <td align="left">
+	<?php
+          echo '<input id="id_reference" name="xaalxml" size="40" value="" />&nbsp;';
+	  button_to_popup_window ('/mod/vizcosh/coursefiles.php?choose=id_reference&id='.
+				  $course->id, 'coursefiles',
+				  get_string ('choose'), 500, 750, get_string ('choose'));
+        ?>
+	&nbsp;
+	<input type="submit" name="addxaalsubmit" value="<?php print_string ('add') ?>" />
+      </td>
+    </tr>
+
   </table>
+
+
   <center>
     <input type="submit" name="savesubmit" value="<?php print_string('savechanges'); ?>" />
     <input type="reset" value="<?php print_string('revert'); ?>" />
-    <input type="submit" name="addvissubmit" value="<?php print_string('addvis','vizcosh'); ?>" />
+    
   </center>
   <input type="hidden" name="id" value="<?php p($cm->id); ?>" />
   <input type="hidden" name="orderposition" value="<?php p($paragraph->orderposition); ?>" />
