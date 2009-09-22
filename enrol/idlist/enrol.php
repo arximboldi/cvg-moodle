@@ -1,7 +1,7 @@
 <?php
 
   /**
-   *  Time-stamp:  <2009-07-05 19:34:54 raskolnikov>
+   *  Time-stamp:  <2009-09-22 19:46:26 raskolnikov>
    *
    *  @file        enrol.php
    *  @author      Juan Pedro Bolívar Puente <raskolnikov@es.gnu.org>
@@ -55,13 +55,8 @@ class enrolment_plugin_idlist
     $userid = $USER->$attr;
     $filtered = enrol_idlist_get_ids ($userid);
 
-    echo $CFG->enrol_idlist_strict_check_p;
-    print $strict_check_p;
     if ($strict_check_p === '1')
       {
-	echo count ($filtered);
-	echo $filtered[0];
-	echo $userid;
 	if (! $filtered || count($filtered) < 1 || $filtered[0] != $userid)
 	  return $strict_hint;  
       }
