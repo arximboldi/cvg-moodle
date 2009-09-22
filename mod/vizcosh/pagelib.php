@@ -83,7 +83,6 @@ class page_vizcosh extends page_generic_activity {
 			print_heading($activityname);
 		}
 */
-		  vizcosh_print_jsxaal_header ();
 		vizcosh_print_messages();
 	}
 		

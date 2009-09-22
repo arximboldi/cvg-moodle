@@ -1,3 +1,10 @@
+2009-09-22  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* jsxaal/dist/jsxaal.css: Fixed Jsxaal not showing properly.
+
+	* emargo/ajax/ajaxfunctions.php, emargo/js/emargo.js, lib.php,
+	view.php: Added Jsxaal support with Emargo features enabled.
+
 2009-09-16  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* emargo/ajax/ajaxfunctions.php, lib.php, view.php,

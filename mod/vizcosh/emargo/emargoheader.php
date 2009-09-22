@@ -12,6 +12,7 @@
 require_once($CFG->libdir . '/ajax/ajaxlib.php');
 
 require_once('emargolib.php');
+require_once($CFG->dirroot . '/mod/vizcosh/lib.php');
 
 $emargoroot = $CFG->wwwroot . '/mod/vizcosh/emargo/';
 
@@ -23,13 +24,14 @@ $emargometadata = '
 	<!-- eMargo Javasript -->
 
 	<script type="text/javascript" src="' . $emargoroot . '/js/emargo.js"></script>
-	<script type="text/javascript" src="' . $emargoroot . '/js/json-parser.js"></script';
+	<script type="text/javascript" src="' . $emargoroot . '/js/json-parser.js"></script>' .
+  vizcosh_get_jsxaal_header ();
 
 $emargometadata .= '
 
-	
-	
-	
+
+
+
 	<!-- YUI Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/lib/yui/button/assets/skins/sam/button.css">
 	<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/lib/yui/container/assets/skins/sam/container.css">
@@ -69,8 +71,8 @@ $emargometadata .= '
 	<script type="text/javascript" src="' . $CFG->wwwroot . '/lib/yui/button/button-min.js"></script> 
 	<script type="text/javascript" src="' . $CFG->wwwroot . '/lib/yui/container/container-min.js"></script> 
 
-	
-	
+
+
 		<script language="javascript" src="' . $CFG->wwwroot . '/lib/yui/dom/dom-min.js" type="text/javascript"></script>
 	<script language="javascript" src="' . $CFG->wwwroot . '/lib/yui/animation/animation-min.js" type="text/javascript"></script>
 	<script type="text/javascript">';
@@ -83,7 +85,7 @@ $emargometadata .= "
 			else e=null;
 			return e;
 		}
-		
+
 		function toggleSlider(e){
 			if(document.getElementById('slider').style.height != this.title+'em') {
 				var anim = new YAHOO.util.Anim('slider',{height:{to:this.title, unit: 'em' }},1,YAHOO.util.Easing.easeOut);
@@ -94,23 +96,23 @@ $emargometadata .= "
 			anim.animate();
 			}
 		}
-		
+
 		function attachEvents(e){
 			//called when window has loaded.
 
 			//attach events to links on the page.
 			YAHOO.util.Event.addListener('toggletoc','click',toggleSlider, this.title);
-			
+
 		}
-		
+
 		YAHOO.util.Event.addListener(window,'load',attachEvents);
-		
-		
-		
+
+
+
 	</script>";
-	
+
 $emargometadata .= '	
-	
+
 	<script type="text/javascript"><!-- 
 		/* language-dependant phrases used in Javascript */
 		var strMarkertoolAlert = "' . get_string('markertool_alert', 'emargo') . '";
@@ -139,8 +141,8 @@ $emargometadata .= '
 		var strPleaseFillInAllRequiredFields = "' . get_string('fill_in_required_fields', 'emargo') . '";
 		var strMarkingToShort = "' . get_string('marking_to_short', 'emargo') . '";
 		' /* . (ajaxenabled() ? '' : 'alert("' . get_string('ajax_unavailable', 'emargo') . '")') */ . ' 
-		
-		
+
+
 		/* the following functions are triggered if someone clicks on YUI-buttons */
 	  function showToggleTooltip() {
 		  showButtonTooltip(\'' . get_string("toggle_markings", "emargo") . '\');
@@ -157,7 +159,7 @@ $emargometadata .= '
 	  function showHelpTooltip() {
 		  showButtonTooltip(\'' . get_string("display_emargo_help", "emargo") . '\');
 	  }
-		
+
 		/**
 		 * this function transforms ordinary html-links into buttons and attaches 
 		 * some event-based functions to these buttons (onmouseover, onmouseout) using 
@@ -167,15 +169,15 @@ $emargometadata .= '
 	';
 
 if ($moduleName != 'slides') {
-	$emargometadata .= '
+  $emargometadata .= '
 			var oToggleButton = new YAHOO.widget.Button("togglebutton");
 			oToggleButton.on("mouseover", showToggleTooltip);
 			oToggleButton.on("mouseout", hideButtonTooltip);
-	
+
 			var oMarkerButton = new YAHOO.widget.Button("markerbutton");
 			oMarkerButton.on("mouseover", showMarkerTooltip);
 			oMarkerButton.on("mouseout", hideButtonTooltip);
-	
+
 	';
 }
 
@@ -185,7 +187,7 @@ $emargometadata .= '
 			oHelpButton.on("mouseout", hideButtonTooltip);
 
 		}
-		
+
 	//--></script>
 	';	
 

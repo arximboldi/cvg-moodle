@@ -129,6 +129,8 @@ if ($chapter->vizcoshid != $vizcosh->id)
 // include all emargo features and all required header metadata
 if (!$vizcosh->disableemargo)
   require_once ($CFG->dirroot . '/mod/vizcosh/emargo/emargoheader.php');
+else
+  $emargometadata = vizcosh_get_jsxaal_header ();
 
 $display_toc_as_html_list =
   ($CFG->vizcosh_tocformat == "list" ||
@@ -316,8 +318,6 @@ ob_start();
   $rightcolumn = ob_get_contents();
 }
 ob_end_clean();
-
-vizcosh_print_jsxaal_header ();
 
 require ('view.html');
 

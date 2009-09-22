@@ -56,14 +56,12 @@ function vizcosh_post_process_content ($content)
 	'style="width:640px;height:480px;margin:0 auto;"></div>'.
 	'<script type="text/javascript">'.
 	'var viewer = null;'.
-	'Event.observe(window, \'load\', function() {'.
 	'viewer = new JSXaalViewer(\'xaal_animation_'. $lastid .'\', '.
 	'{settingsPanel: true, showNarrative: false, smoothAnimate: false},'.
 	' {fileUrl: '.
 	'"dl_xaal.php?id=' . $COURSE->id. '&file=$1"' .
 	'});'.
-	'});'.
-	'</script></br>';
+	'</script><br/>';
 
       
       $content = preg_replace ('/\[\s*xaal\s+([\w\.\,\-\ ]*)\s*\]/',
@@ -74,6 +72,49 @@ function vizcosh_post_process_content ($content)
   return $content;
 }
 
+function vizcosh_post_process_content_emargo ($content)
+{
+  global $COURSE;
+  
+  $lastid = 0;
+  $count = 1;
+  while ($count > 0)
+    {
+
+      $replace_with=
+	'<br/></br>'.
+	'<div id="xaal_animation_'. $lastid .'" class="jsxaal" '.
+	'style="width:640px;height:480px;margin:0 auto;"></div><br/>';
+
+      
+      $content = preg_replace ('/\[\s*xaal\s+([\w\.\,\-\ ]*)\s*\]/',
+			       $replace_with, $content, 1, $count);
+
+      $lastid++;
+    }
+  return $content;
+}
+
+function vizcosh_create_jsxaal_command ($content)
+{
+  global $COURSE;
+  
+  $count = preg_match_all ('/\[\s*xaal\s+(?<file>[\w\.\,\-\ ]*)\s*\]/', $content, $matches);
+  $result = '';
+  
+  for ($id = 0; $id < $count; $id++)
+    {
+      $result .=
+	'var viewer = null;'.
+	'viewer = new JSXaalViewer(\'xaal_animation_'. $id .'\', '.
+	'{settingsPanel: true, showNarrative: false, smoothAnimate: false},'.
+	' {fileUrl: '.
+	'"dl_xaal.php?id=' . $COURSE->id. '&file='. $matches['file'][$id] .'"' .
+	'});';
+    }
+
+  return $result;
+}
 
 /**
  * Splits content into paragraphs. Note that empty chapters are deleted.
@@ -144,9 +185,9 @@ function vizcosh_delete_paragraph ($paragraph, $justedit = false)
 }
 
 
-function vizcosh_print_jsxaal_header ()
+function vizcosh_get_jsxaal_header ()
 {
-  echo
+  return
 '<script type="text/javascript" src="jsxaal/lib/prototype.js"></script>
  <script type="text/javascript" src="jsxaal/lib/scriptaculous.js?load=effects"></script>
  <script src="jsxaal/lib/pgf-core.js" type="text/javascript"></script>
@@ -155,6 +196,7 @@ function vizcosh_print_jsxaal_header ()
  <script src="jsxaal/dist/jsxaal-core-min.js" type="text/javascript"></script>
  <link rel="stylesheet" href="jsxaal/dist/jsxaal.css"/>';
 }
+
 
 /**
  * Checks for authorithation in file sending pages.

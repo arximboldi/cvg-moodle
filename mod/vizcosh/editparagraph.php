@@ -239,9 +239,6 @@ $strvizcoshs = get_string ('modulenameplural', 'vizcosh');
 $stredit     = get_string ('editchapter','vizcosh');
 $pageheading = get_string ('editingchapter', 'vizcosh');
 
-// TODO: parametrize
-vizcosh_print_jsxaal_header ();
-
 //print header bar
 print_header ("$course->shortname: $vizcosh->name", 
 	      $course->fullname, 
