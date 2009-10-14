@@ -1,3 +1,10 @@
+2009-10-14  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* emargo/emargolib.php (emargo_print_commentbox): Fixed a bug that
+	made comments to get wrong when showing/hiding/posting comments.
+
+	* *: Fixed translations. Spanish translation almost finished.
+
 2009-09-22  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* jsxaal/dist/jsxaal.css: Fixed Jsxaal not showing properly.

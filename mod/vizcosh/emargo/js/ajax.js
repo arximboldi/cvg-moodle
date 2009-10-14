@@ -78,11 +78,11 @@ var handleSuccess = function(o) {
      case 'updateComment':
      case 'deleteComment':
 	 commentBoxDiv = document.getElementById("comments");
-	 //		alert("commentBoxDiv:" +commentBoxDiv +" / "+commentBoxDiv.value +", o:" +o +",=" +o.responseText);
-	 if(o.responseText !== undefined){
+	 //alert("commentBoxDiv:" +commentBoxDiv +" / "+commentBoxDiv.value +", o:" +o +",=" +o.responseText);
+	 if(o.responseText != undefined && o.responseText != 'undefined'){
 	     var responseObject = json_parse(o.responseText); 
 	     commentBoxDiv.innerHTML = stripSlashes(responseObject.content);
-	 }
+	 } 
 	 initializeCommentbox();
 	 break;
      case 'getSingleComment':
@@ -222,7 +222,7 @@ var handleSuccess = function(o) {
      var postData = "ajaxObj=Commentbox&ajaxAction=switchComments&paragraphId=" + paragraphId + "&switchstate=" + switchstate;
      commentBoxDiv = document.getElementById("comments");
      commentBoxDiv.innerHTML = "";
-     makeRequest(postData, 'comments', "Wechsle Ansicht...", 'switchComments');
+     makeRequest(postData, 'comments', "strSwitchingComment", 'switchComments');
  }
 
  function saveComment(paragraphId, subject, message, parentId, messageType) {

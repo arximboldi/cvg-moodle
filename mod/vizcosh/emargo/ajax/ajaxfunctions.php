@@ -59,7 +59,7 @@ function ajax_Marker_loadMarkedText ()
 	else
 	  {
 	  $markedContent .=
-	    'Um Inhalt hinzuzuf&uuml;gen, wechseln Sie in den Bearbeiten-Modus.</div>';	  
+	    get_string ('change_to_edit_mode', 'vizcosh') .'</div>';	  
 	  }
       }
     }		
@@ -209,7 +209,10 @@ function ajax_Commentbox_switchComments() {
   }
 
   // re-init commentbox contents	
-  if (!$paragraphs = get_records_select('vizcosh_paragraphs', 'vizcoshid = '.$moduleInstance->id, 'chapterid, orderposition', 'id, chapterid, orderposition')){
+  if (!$paragraphs = get_records_select('vizcosh_paragraphs',
+					'vizcoshid = '.$moduleInstance->id,
+					'chapterid, orderposition',
+					'id, chapterid, orderposition')){
     ajaxReply(601, 'Error reading paragraphs.');
   }
   
@@ -539,7 +542,7 @@ function getWrappingHtmlCode($title, $paragraphsArray) {
     $questionmark_count = emargo_count_questionmarks($chapterid, $paragraphsArray[$i]->id);
     $questionmark_fontsize = (($questionmark_count > 9) ? 9 : $questionmark_count);
 
-    $paragraphinfo = $comment_count . ' ' . get_string("comments", "emargo") . ', ' . $unread_comment_count . ' ' . get_string("unread", "emargo") . ' ' . get_string("and", "emargo") . ' ' . $private_note_count  .' ' . get_string("notes", "emargo")  . ' ' . get_string("on_paragraph", "emargo") . ' ' . ($i + 1);
+    $paragraphinfo = $comment_count . ' ' . get_string("comments", 'vizcosh') . ', ' . $unread_comment_count . ' ' . get_string("unread", 'vizcosh') . ' ' . get_string("and", 'vizcosh') . ' ' . $private_note_count  .' ' . get_string("notes", 'vizcosh')  . ' ' . get_string("on_paragraph", 'vizcosh') . ' ' . ($i + 1);
     
     $content .= '
 		<div title="' . ($i + 1) . '" id="contentblock_' . $paragraphsArray[$i]->id . '" onmouseover="javascript:toggleParagraphIcons(' . ($i + 1) . ');" onmouseout="javascript:toggleParagraphIcons(' . ($i + 1) . ');">
@@ -555,11 +558,11 @@ function getWrappingHtmlCode($title, $paragraphsArray) {
     $content .= '<div title="' . $paragraphinfo . '"><font size=1>' . $comment_count . '<img src="' . $emargoroot . '/pix/buttons/discuss_paragraph_'.$ImgPostfix.'.png" border="0" align=top>&nbsp;'.$private_note_count.'<img src="' . $emargoroot . '/pix/buttons/discuss_paragraph_private.png" border="0" align=top></font></div>';
     
     #Manages the display of bookmarks
-    $content .= '<div ' . ($paragraph_is_bookmarked ? '' : 'class="bookmark-hidden" id="bookmark-' . ($i+1) . '"') . '><a title="' . ($paragraph_is_bookmarked ? get_string("remove_bookmark_from_paragraph", "emargo") : get_string("set_bookmark_on_paragraph", "emargo") )  . ' ' . ($i+1) .  '" href="javascript:' . ($paragraph_is_bookmarked ? 'delete' : 'save') . 'Bookmark(' . $paragraphsArray[$i]->id . ');"><img onmouseover="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' . (!$paragraph_is_bookmarked ? '' : '_gray') . '.png\'" onmouseout="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' . ($paragraph_is_bookmarked ? '' : '_gray') . '.png\'" src="' . $emargoroot . '/pix/buttons/bookmark' . ($paragraph_is_bookmarked ? '' : '_gray') . '.png" class="bookmarkimg" border="0" /></a></div>';
+    $content .= '<div ' . ($paragraph_is_bookmarked ? '' : 'class="bookmark-hidden" id="bookmark-' . ($i+1) . '"') . '><a title="' . ($paragraph_is_bookmarked ? get_string("remove_bookmark_from_paragraph", 'vizcosh') : get_string("set_bookmark_on_paragraph", 'vizcosh') )  . ' ' . ($i+1) .  '" href="javascript:' . ($paragraph_is_bookmarked ? 'delete' : 'save') . 'Bookmark(' . $paragraphsArray[$i]->id . ');"><img onmouseover="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' . (!$paragraph_is_bookmarked ? '' : '_gray') . '.png\'" onmouseout="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' . ($paragraph_is_bookmarked ? '' : '_gray') . '.png\'" src="' . $emargoroot . '/pix/buttons/bookmark' . ($paragraph_is_bookmarked ? '' : '_gray') . '.png" class="bookmarkimg" border="0" /></a></div>';
     
     #Manages the display of the questionmarks, (used to mark a parapgraph as difficult to understand)
     #Todo: Muss ($i+1) auch durch $paragraphsArray[$i]->id ersetzt werden? Was bewirkt die id="questionmark-n"? analog Zeile 429
-    $content .= '<div ' . ($paragraph_is_questionmarked ? 'class="questionmark" id="questionmark-' . ($i+1) . '"' : 'class="questionmark-hidden" id="questionmark-hidden' . ($i+1) . '"') . ' style="font-size:1.' . $questionmark_fontsize . 'em;"><a title="' . ($paragraph_is_questionmarked ? get_string("remove_questionmark", "emargo") : get_string("set_questionmark", "emargo") )  . '" href="javascript:' . ($paragraph_is_questionmarked ? 'delete' : 'save') . 'Questionmark(' . $paragraphsArray[$i]->id . ');">?</a></div></div></div>';
+    $content .= '<div ' . ($paragraph_is_questionmarked ? 'class="questionmark" id="questionmark-' . ($i+1) . '"' : 'class="questionmark-hidden" id="questionmark-hidden' . ($i+1) . '"') . ' style="font-size:1.' . $questionmark_fontsize . 'em;"><a title="' . ($paragraph_is_questionmarked ? get_string("remove_questionmark", 'vizcosh') : get_string("set_questionmark", 'vizcosh') )  . '" href="javascript:' . ($paragraph_is_questionmarked ? 'delete' : 'save') . 'Questionmark(' . $paragraphsArray[$i]->id . ');">?</a></div></div></div>';
     
     $content .= '<div class="paragraph_number">';
 

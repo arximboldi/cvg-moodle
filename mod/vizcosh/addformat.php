@@ -43,9 +43,11 @@ $tabs[] = $row;
 $vizalgosformats = get_records('vizcosh_vizalgo_formats');
 //fill a table with the formats received from the database
 $table->head = array (
-    get_string('formatname',
-    'vizcosh'
-), get_string('formatextension', 'vizcosh'), get_string('formatauthor', 'vizcosh'), get_string('formatdate', 'vizcosh'), "<a class='formatediting_new' title='New' href='editorformat.php?formatid=-1&modus=new'><img src='pix/add.gif' class='iconbig'  alt='New' /></a>");
+    get_string('formatname', 'vizcosh'),
+    get_string('formatextension', 'vizcosh'),
+    get_string('formatauthor', 'vizcosh'),
+    get_string('formatdate', 'vizcosh'),
+    "<a class='formatediting_new' title='".get_string('new')."' href='editorformat.php?formatid=-1&modus=new'><img src='pix/add.gif' class='iconbig'  alt='".get_string ('new')."' /></a>");
 $table->align = array (
     'left',
     'left',

@@ -50,6 +50,7 @@ else
     $orderposition = (integer) $orderposition;
   }
 
+
 //used for redirecting if errors occur
 $errorurl = 'view.php?id='.$id.'&chapterid='.$chapterid;
 
@@ -68,6 +69,7 @@ $usehtmleditor = can_use_html_editor();
 /// visualization), then process.
 if (($form = data_submitted ()) && confirm_sesskey ())
   {
+    
     //if "Add Algorithm Visualization"-button was hit--> save current
     //changes and redirect
     if (isset ($_REQUEST['addvissubmit']))
@@ -135,8 +137,6 @@ if (($form = data_submitted ()) && confirm_sesskey ())
 		      error (get_string ('db_error', 'vicosh'), $errorurl);
 		  }
 	      }
-	    else
-	      die;
 	  }
 	
 	$order_delta = 0;

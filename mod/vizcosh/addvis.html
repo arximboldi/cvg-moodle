@@ -45,37 +45,37 @@ if ($tab == 'search') {
 <form method='get' action='addvis.php'>
   <table align="center" cellpadding="5">
     <tr valign="top">
-      <td><?php print_string("vizalgotitle", "vizcosh"); ?>:</td>
+      <td><?php print_string("alvizname", "vizcosh"); ?>:</td>
       <td><input type="text" name="search_title" size="30"/></td>
     </tr>
     <tr valign="top">
-      <td><?php print_string("vizalgodesc", "vizcosh"); ?>:</td>
+      <td><?php print_string("alvizdesc", "vizcosh"); ?>:</td>
       <td><input type="text" name="search_description" size="30"/></td>
     </tr>
     <tr valign="top">
-      <td><?php print_string("vizalgoauth", "vizcosh"); ?>:</td>
+      <td><?php print_string("alvizauthor", "vizcosh"); ?>:</td>
       <td><input type="text" name="search_author" size="30"/></td>
     </tr>
     <tr valign="top">
-      <td><?php print_string("vizalgotopics", "vizcosh"); ?>:</td>
+      <td><?php print_string("alviztopics", "vizcosh"); ?>:</td>
       <td><input type="text" name="search_topics" size="30"/></td>
     </tr>
     <tr>
-      <td><?php print_string("vizalgosort", "vizcosh"); ?></td>
+      <td><?php print_string("sort_by", "vizcosh"); ?></td>
       <td>
 	<select id="search_sort" name="search_sort">
-	  <option value="title"><?php print_string("vizalgotitle", "vizcosh"); ?></option>
-	  <option value="description"><?php print_string("vizalgodesc", "vizcosh"); ?></option>
-	  <option value="author"><?php print_string("vizalgoauth", "vizcosh"); ?></option>
-	  <option value="topics"><?php print_string("vizalgotopics", "vizcosh"); ?></option>
+	  <option value="title"><?php print_string("alvizname", "vizcosh"); ?></option>
+	  <option value="description"><?php print_string("alvizdesc", "vizcosh"); ?></option>
+	  <option value="author"><?php print_string("alvizauthor", "vizcosh"); ?></option>
+	  <option value="topics"><?php print_string("alviztopics", "vizcosh"); ?></option>
 	</select>
       </td>
     </tr>
     <tr>
       <td>
 	<input type="hidden" name="tab" value="list"/>
-	<input type="submit" value="<?php print_string("search","vizcosh"); ?>"/>
-	<input type="reset" value="<?php print_string("reset","vizcosh"); ?>"/>
+	<input type="submit" value="<?php print_string("search"); ?>"/>
+	<input type="reset" value="<?php print_string("reset"); ?>"/>
       </td>
     </tr>
   </table>

@@ -429,7 +429,7 @@ function get_hash(){
   var id =  '#comment-link-'+comment_id;  
   var para = jQuery(id).text();
   //window.location.hash = '#' + para;
-  return para;	 
+  return para;
  }	  
  else if(window.location.hash.toString().indexOf("respond") == 1){
   return false;

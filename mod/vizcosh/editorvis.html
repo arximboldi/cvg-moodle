@@ -13,7 +13,7 @@
   <table align="center" cellpadding="5">
     <tr valign="top">
       <td align="right">
-        <b><?php print_string("vizalgotitle", "vizcosh") ?>:</b>
+        <b><?php print_string("alvizname", "vizcosh") ?>:</b>
       </td>
       <td align="left">
         <input type="text" name="title" size="30" 
@@ -22,7 +22,7 @@
     </tr>
     <tr valign="top">
       <td align="right">
-        <b><?php print_string("vizalgodesc", "vizcosh") ?>:</b>
+        <b><?php print_string("alvizdesc", "vizcosh") ?>:</b>
       </td>
       <td align="left">
         <input type="text" name="description" size="30"
@@ -32,7 +32,7 @@
     </tr>
     <tr valign="top">
       <td align="right">
-        <b><?php print_string("vizalgoauth", "vizcosh") ?>:</b>
+        <b><?php print_string("alvizauthor", "vizcosh") ?>:</b>
       </td>
       <td align="left">
         <input type="text" name="author_full_name" size="30"
@@ -41,7 +41,7 @@
     </tr>
     <tr valign="top">
       <td align="right">
-        <?php print_string("vizalgotopics", "vizcosh") ?>:
+        <?php print_string("alviztopics", "vizcosh") ?>:
       </td>
       <td align="left">
         <input type="text" name="topics" size="30"
@@ -50,7 +50,7 @@
     </tr>
     <tr valign="top">
       <td align="right">
-        <b><?php print_string("vizalgoformat", "vizcosh") ?>:</b>
+        <b><?php print_string("alvizformat", "vizcosh") ?>:</b>
       </td>
       <td align="left">
 	<?php 
@@ -65,21 +65,21 @@
 	        }
 	      echo '</select>';
 	    }
-	    ?>    
-        <input type="submit" name="formateditorsubmit" value="Format Editor" />
+	    ?><br/>
+	    <input type="submit" name="formateditorsubmit" value="<?php print_string ('format_editor', 'vizcosh')?>" />
       </td>
     </tr>
     <tr valign="top">
       <td align="right">
-        <?php print_string("vizalgofile", "vizcosh") ?>:
+        <?php print_string("file") ?>:
       </td>
       <td align="left">
         <?php
             if (isset($vizalgo->data) && $vizalgo->data!=null &&
 		isset($vizalgo->fndata) && $vizalgo->fndata!=null)
-	      echo $vizalgo->fndata;
+	      echo '<code>' . $vizalgo->fndata . '</code>';
         ?>
-	
+	<br/>
 	<?php print_string ('new_file', 'vizcosh') ?>:
 	<input type="file" name="data" size="30"/>
 	<br/>
@@ -90,7 +90,7 @@
     </tr>
     <tr valign="top">
       <td align="right">
-	<?php print_string("vizalgothumb", "vizcosh") ?>:
+	<?php print_string("alvizthumb", "vizcosh") ?>:
       </td>
       <td align="left">
 	<?php
@@ -110,13 +110,13 @@
 	      }
 	?>
 	<br/>
-	<input type="radio" name="deletethumb" value="old" checked>Keep
+	<input type="radio" name="deletethumb" value="old" checked><?php print_string ('keep') ?>
 	<br/>
-	<input type="radio" name="deletethumb" value="delete">Delete
+	<input type="radio" name="deletethumb" value="delete"><?php print_string ('delete') ?>
 	<br/>
-	<input type="radio" name="deletethumb" value="thumbnail">New Thumbnail: <input type="file" name="thumbnail" size="30">
+	<input type="radio" name="deletethumb" value="thumbnail"><?php print_string ('new_thumb', 'vizcosh') ?> <input type="file" name="thumbnail" size="30">
 	<br/>
-	<input type="radio" name="deletethumb" value="text">New Text: <input type="text" name="text" size="30" value="">
+	<input type="radio" name="deletethumb" value="text"><?php print_string ('new_text', 'vizcosh') ?> <input type="text" name="text" size="30" value="">
 	<br/>    
       </td>
     </tr>

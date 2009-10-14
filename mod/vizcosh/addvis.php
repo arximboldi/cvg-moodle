@@ -93,9 +93,9 @@ if ($tab == 'list')
 			  get_string('alvizdesc',   'vizcosh'),
 			  get_string('alvizauthor', 'vizcosh'),
 			  get_string('alvizformat', 'vizcosh'),
-			  "<a class='editing_new' title='New'".
+			  "<a class='editing_new' title='".get_string ('new')."'".
 			  "href='editorvis.php?vizalgo=-1&modus=new'>".
-			  "<img src='pix/add.gif' class='iconbig'  alt='New' /></a>");
+			  "<img src='pix/add.gif' class='iconbig'  alt='".get_string ('new')."' /></a>");
 
     $table->align = array ('left', 'left', 'center', 'center', 'center', 'center');
     

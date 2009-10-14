@@ -115,49 +115,50 @@ $emargometadata .= '
 
 	<script type="text/javascript"><!-- 
 		/* language-dependant phrases used in Javascript */
-		var strMarkertoolAlert = "' . get_string('markertool_alert', 'emargo') . '";
-		var strOverview = "' . get_string('overview', 'emargo') . '";
-		var strHelp = "' . get_string('help', 'emargo') . '";
-		var strParagraph = "' . get_string('paragraph', 'emargo') . '";
-		var strComments = "' . get_string('comments', 'emargo') . '";
-		var strWholePage = "' . get_string('whole_page', 'emargo') . '";
-		var strOnParagraph = "' . get_string('on_paragraph', 'emargo') . '";
-		var strOnWholePage = "' . get_string('on_whole_page', 'emargo') . '";
-		var strDeleteMarkings = "' . get_string('delete_markings', 'emargo') . '";
-		var strLoadingChapterContent = "' . get_string('loading_chapter_content', 'emargo') . '";
-		var strDeletingMarking = "' . get_string('deleting_marking', 'emargo') . '";
-		var strSavingComment = "' . get_string('saving_comment', 'emargo') . '";
-		var strDeletingComment = "' . get_string('deleting_comment', 'emargo') . '";
-		var strDeleteCommentConfirmation = "' . get_string('delete_comment_confirmation', 'emargo') . '";
-		var strEditComment = "' . get_string('edit_comment', 'emargo') . '";
-		var strCancelEditing = "' . get_string('cancel_editing', 'emargo') . '";
-		var strMakeEditingNotPublic = "' . get_string('make_editing_not_public', 'emargo') . '";
-		var strSaveComment = "' . get_string('save_comment', 'emargo') . '";
-		var strSavingMarking = "' . get_string('saving_marking', 'emargo') . '";
-		var strSavingBookmark = "' . get_string('saving_bookmark_for_paragraph', 'emargo') . '";
-		var strDeletingBookmark = "' . get_string('deleting_bookmark_for_paragraph', 'emargo') . '";
-		var strSavingQuestionmark = "' . get_string('saving_questionmark_for_paragraph', 'emargo') . '";
-		var strDeletingQuestionmark = "' . get_string('deleting_questionmark_for_paragraph', 'emargo') . '";
-		var strPleaseFillInAllRequiredFields = "' . get_string('fill_in_required_fields', 'emargo') . '";
-		var strMarkingToShort = "' . get_string('marking_to_short', 'emargo') . '";
-		' /* . (ajaxenabled() ? '' : 'alert("' . get_string('ajax_unavailable', 'emargo') . '")') */ . ' 
+		var strMarkertoolAlert = "' . get_string('markertool_alert', 'vizcosh') . '";
+		var strOverview = "' . get_string('overview', 'vizcosh') . '";
+		var strHelp = "' . get_string('help', 'vizcosh') . '";
+		var strParagraph = "' . get_string('paragraph', 'vizcosh') . '";
+		var strComments = "' . get_string('comments', 'vizcosh') . '";
+		var strWholePage = "' . get_string('whole_page', 'vizcosh') . '";
+		var strOnParagraph = "' . get_string('on_paragraph', 'vizcosh') . '";
+		var strOnWholePage = "' . get_string('on_whole_page', 'vizcosh') . '";
+		var strDeleteMarkings = "' . get_string('delete_markings', 'vizcosh') . '";
+		var strLoadingChapterContent = "' . get_string('loading_chapter_content', 'vizcosh') . '";
+		var strDeletingMarking = "' . get_string('deleting_marking', 'vizcosh') . '";
+		var strSavingComment = "' . get_string('saving_comment', 'vizcosh') . '";
+                var strSwitchingComment = "' . get_string('switching_comment', 'vizcosh') . '";
+		var strDeletingComment = "' . get_string('deleting_comment', 'vizcosh') . '";
+		var strDeleteCommentConfirmation = "' . get_string('delete_comment_confirmation', 'vizcosh') . '";
+		var strEditComment = "' . get_string('edit_comment', 'vizcosh') . '";
+		var strCancelEditing = "' . get_string('cancel_editing', 'vizcosh') . '";
+		var strMakeEditingNotPublic = "' . get_string('make_editing_not_public', 'vizcosh') . '";
+		var strSaveComment = "' . get_string('save_comment', 'vizcosh') . '";
+		var strSavingMarking = "' . get_string('saving_marking', 'vizcosh') . '";
+		var strSavingBookmark = "' . get_string('saving_bookmark_for_paragraph', 'vizcosh') . '";
+		var strDeletingBookmark = "' . get_string('deleting_bookmark_for_paragraph', 'vizcosh') . '";
+		var strSavingQuestionmark = "' . get_string('saving_questionmark_for_paragraph', 'vizcosh') . '";
+		var strDeletingQuestionmark = "' . get_string('deleting_questionmark_for_paragraph', 'vizcosh') . '";
+		var strPleaseFillInAllRequiredFields = "' . get_string('fill_in_required_fields', 'vizcosh') . '";
+		var strMarkingToShort = "' . get_string('marking_to_short', 'vizcosh') . '";
+		' /* . (ajaxenabled() ? '' : 'alert("' . get_string('ajax_unavailable', 'vizcosh') . '")') */ . ' 
 
 
 		/* the following functions are triggered if someone clicks on YUI-buttons */
 	  function showToggleTooltip() {
-		  showButtonTooltip(\'' . get_string("toggle_markings", "emargo") . '\');
+		  showButtonTooltip(\'' . get_string("toggle_markings", 'vizcosh') . '\');
 	  }
 	  function showMarkerTooltip() {
-		  showButtonTooltip(\'' . get_string("toggle_marker", "emargo") . '\');
+		  showButtonTooltip(\'' . get_string("toggle_marker", 'vizcosh') . '\');
 	  }
 	  function showDeleteTooltip() {
-		  showButtonTooltip(\'' . get_string("delete_all_markings", "emargo") . '\');
+		  showButtonTooltip(\'' . get_string("delete_all_markings", 'vizcosh') . '\');
 	  }
 	  function showOthersTooltip() {
-		  showButtonTooltip(\'' . get_string("display_all_markings", "emargo") . '\');
+		  showButtonTooltip(\'' . get_string("display_all_markings", 'vizcosh') . '\');
 	  }
 	  function showHelpTooltip() {
-		  showButtonTooltip(\'' . get_string("display_emargo_help", "emargo") . '\');
+		  showButtonTooltip(\'' . get_string("display_emargo_help", 'vizcosh') . '\');
 	  }
 
 		/**
