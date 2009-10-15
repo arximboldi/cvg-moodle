@@ -46,7 +46,7 @@ function ajax_Marker_loadMarkedText ()
       {
 	//contains no paragraphs
 	
-	$markedContent = '<div id="contentblock_0">Dieses Kapitel enth&auml;lt noch keinen Inhalt. ';
+	$markedContent = '<div id="contentblock_0">'.get_string ('no_content', 'vizcosh');
 	if (isset($USER->editing) && ($USER->editing==1))
 	  {
 	    $markedContent .=
@@ -54,7 +54,7 @@ function ajax_Marker_loadMarkedText ()
 	      '" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.
 	      '&paragraphid=-1&orderposition=1">'.
 	      '<img src="pix/add.gif" height="11" class="iconsmall" alt="'.
-	      get_string('edit').'" />Absatz hinzuf&uuml;gen</a>';
+	      get_string('edit').'" />'.get_string ('add_paragraph', 'vizcosh').'</a>';
 	  }
 	else
 	  {
@@ -110,7 +110,7 @@ function ajax_Marker_loadUnmarkedText()
 	}
 	else{
 	  $Content .=
-	    'Um Inhalt hinzuzuf&uuml;gen, wechseln Sie in den Bearbeiten-Modus.</div>';
+	    get_string ('change_to_edit_mode', 'vizcosh') .'</div>';
 	}
       }
     }

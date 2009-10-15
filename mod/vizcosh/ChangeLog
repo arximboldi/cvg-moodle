@@ -1,3 +1,10 @@
+2009-10-15  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* lang/es_utf8/vizcosh.php: Added more translations.
+
+	* vizcosh.php: Fixed filters not being applied when AJAX is
+	enabled.
+
 2009-10-14  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* emargo/emargolib.php (emargo_print_commentbox): Fixed a bug that

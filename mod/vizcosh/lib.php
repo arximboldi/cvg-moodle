@@ -69,7 +69,14 @@ function vizcosh_post_process_content ($content)
 
       $lastid++;
     }
-  return $content;
+  
+  $nocleanoption = new object();
+  $nocleanoption->noclean = true;
+
+  return format_text($content,
+		     FORMAT_HTML,
+		     $nocleanoption,
+		     $COURSE->id);
 }
 
 function vizcosh_post_process_content_emargo ($content)
@@ -92,6 +99,17 @@ function vizcosh_post_process_content_emargo ($content)
 
       $lastid++;
     }
+
+  $nocleanoption = new object();
+  $nocleanoption->noclean = true;
+
+  /* FIXME: This fails with TeX filter unless $texcache = new
+     stdClass; is on line 160, filter/tex/filter.php */
+  $content =  format_text($content,
+			  FORMAT_HTML,
+			  $nocleanoption,
+			  $COURSE->id);
+  
   return $content;
 }
 

@@ -389,7 +389,7 @@ else
     $nocleanoption = new object();
     $nocleanoption->noclean = true;
     echo '<div class="vizcosh_content">';
-    echo format_text(vizcosh_post_process_content ($content), FORMAT_HTML, $nocleanoption, $course->id);
+    echo vizcosh_post_process_content ($content);
     echo '</div>';
 }
 
