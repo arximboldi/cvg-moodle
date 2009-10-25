@@ -2,67 +2,68 @@
 <!--HTML page for editing algorihm visualization formats
 included by: editorformat.php
 uses the following variables:
-    from editorformat.php:
-        - $format: contains the data of the algorithm visualization format to insert or edit or delete
-        - $USER
-        - $modus: new, edit or delete
+from editorformat.php:
+- $format: contains the data of the algorithm visualization format to insert or edit or delete
+- $USER
+- $modus: new, edit or delete
 -->
+
 <form name="formateditform" method="post" action="editorformat.php">
 <table align="center" cellpadding="5">
 
-<tr valign="top">
+  <tr valign="top">
     <td align="right">
-        <b><?php print_string("formatname", "vizcosh") ?>:</b>
+      <b><?php print_string("formatname", "vizcosh") ?>:</b>
     </td>
     <td align="left">
-        <input type="text" name="name" size="30" value="<?php p($format->name) ?>">
+      <input type="text" name="name" size="30" value="<?php p($format->name) ?>">
     </td>
-</tr>
-<tr valign="top">
+  </tr>
+  <tr valign="top">
     <td align="right">
-        <?php print_string("formatextension", "vizcosh") ?>:
+      <?php print_string("formatextension", "vizcosh") ?>:
     </td>
     <td align="left">
-        <input type="text" name="extension" size="30" value="<?php p($format->extension) ?>">
+      <input type="text" name="extension" size="30" value="<?php p($format->extension) ?>">
     </td>
-</tr>
-<tr valign="top">
+  </tr>
+  <tr valign="top">
     <td align="right">
-        <b><?php print_string("formatauthor", "vizcosh") ?>:</b>
+      <b><?php print_string("formatauthor", "vizcosh") ?>:</b>
     </td>
     <td align="left">
-        <input type="text" name="author" size="30" value="<?php p($USER->firstname);echo " ";p($USER->lastname) ?>" readonly>
+      <input type="text" name="author" size="30" value="<?php p($USER->firstname);echo " ";p($USER->lastname) ?>" readonly>
     </td>
-</tr>
-<tr valign="top">
+  </tr>
+  <tr valign="top">
     <td align="right">
-        <b><?php print_string("formattemplate", "vizcosh") ?>:</b>    
-        <p>
-        <table> 
-        <td align="left">   
-            <input type="radio" name="template_sample" value="animal"> <?php print_string("animalsample", "vizcosh") ?><br>
-            <input type="radio" name="template_sample" value="jhave"> <?php print_string("jhavesample", "vizcosh") ?><br>
-            <input type="radio" name="template_sample" value="jawaa"> <?php print_string("jawaasample", "vizcosh") ?><br>
-            <input type="submit" name="load" value="<?php print_string('loadtemplate',"vizcosh") ?>"/>
-        </td>    
-        </table>
+      <b><?php print_string("formattemplate", "vizcosh") ?>:</b>    
+      <p>
+      <table> 
+	<td align="left">   
+	  <input type="radio" name="template_sample" value="animal"> <?php print_string("animalsample", "vizcosh") ?><br>
+	  <input type="radio" name="template_sample" value="jhave"> <?php print_string("jhavesample", "vizcosh") ?><br>
+	  <input type="radio" name="template_sample" value="jawaa"> <?php print_string("jawaasample", "vizcosh") ?><br>
+	  <input type="submit" name="load" value="<?php print_string('loadtemplate',"vizcosh") ?>"/>
+	</td>    
+      </table>
     </td>
     <td align="left">
-        <textarea name="template" cols="80" rows="20"><?php p($format->jnlp_template) ?></textarea>
+      <textarea name="template" cols="80" rows="20"><?php p($format->jnlp_template) ?></textarea>
     </td>
-</tr>
+  </tr>
 </table>
 <center>
 <?php
 if ($modus == 'new') {
-    echo '<input type="submit" value="' . get_string("editorcreate", "vizcosh") . '"/>';
+echo '<input type="submit" value="' . get_string("editorcreate", "vizcosh") . '"/>';
 } else {
-    echo '<input type="submit" value="' . get_string("editorupdate", "vizcosh") . '"/>';
+echo '<input type="submit" value="' . get_string("editorupdate", "vizcosh") . '"/>';
 }
 ?>
 </center>
-    <input type="hidden" name="formatid"        value="<?php p($format->id) ?>" />
-    <input type="hidden" name="modus"        value="<?php p($modus) ?>" />
-    <input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" />
-    <input name="MAX_FILE_SIZE" type="hidden" value="16777216" />
+<input type="hidden" name="formatid"        value="<?php p($format->id) ?>" />
+<input type="hidden" name="modus"        value="<?php p($modus) ?>" />
+<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" />
+<input name="MAX_FILE_SIZE" type="hidden" value="16777216" />
 </form>

@@ -89,7 +89,7 @@ function vizcosh_post_process_content_emargo ($content)
     {
 
       $replace_with=
-	'<br/></br>'.
+	'<br/><br/>'.
 	'<div id="xaal_animation_'. $lastid .'" class="jsxaal" '.
 	'style="width:640px;height:480px;margin:0 auto;"></div><br/>';
 
@@ -105,10 +105,11 @@ function vizcosh_post_process_content_emargo ($content)
 
   /* FIXME: This fails with TeX filter unless $texcache = new
      stdClass; is on line 160, filter/tex/filter.php */
-  $content =  format_text($content,
-			  FORMAT_HTML,
-			  $nocleanoption,
-			  $COURSE->id);
+
+  $content = format_text($content,
+			 FORMAT_HTML,
+			 $nocleanoption,
+			 $COURSE->id);
   
   return $content;
 }
@@ -139,6 +140,7 @@ function vizcosh_create_jsxaal_command ($content)
  */
 function vizcosh_split_paragraphs ($content)
 {
+  $content = preg_replace ('/<\/\s*[Pp]\s*>/', '</p><br/><br/>', $content);
   return preg_split ('/(\s*<\s*[bB][rR]\s*\/?\s*>\s*){2,}/',
 		     $content, -1, PREG_SPLIT_NO_EMPTY);
 }
@@ -206,7 +208,7 @@ function vizcosh_delete_paragraph ($paragraph, $justedit = false)
 function vizcosh_get_jsxaal_header ()
 {
   return
-'<script type="text/javascript" src="jsxaal/lib/prototype.js"></script>
+    '<script type="text/javascript" src="jsxaal/lib/prototype.js"></script>
  <script type="text/javascript" src="jsxaal/lib/scriptaculous.js?load=effects"></script>
  <script src="jsxaal/lib/pgf-core.js" type="text/javascript"></script>
  <script src="jsxaal/lib/pgf-renderer.js" type="text/javascript"></script>

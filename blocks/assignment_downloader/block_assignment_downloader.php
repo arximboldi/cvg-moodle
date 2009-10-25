@@ -1,7 +1,7 @@
 <?php
 
   /**
-   *  Time-stamp:  <2009-07-22 13:32:23 raskolnikov>
+   *  Time-stamp:  <2009-10-25 17:52:24 raskolnikov>
    *
    *  @file        block_assignment_downloader.php
    *  @author      Juan Pedro Bolívar Puente <raskolnikov@es.gnu.org>
@@ -73,7 +73,7 @@ class block_assignment_downloader extends block_base
 	      '<div align="center">'.
 	      '<form method="get" action="'. $CFG->wwwroot .'/blocks/assignment_downloader/download.php"> ' .
 	      '<table align="center">'.
-	      '<tr><td align="right">'.get_string ('modulename', 'assignment').': </td><td>'.
+	      '<tr><td align="right">'.get_string ('modulename', 'assignment').': </td><td></td><tr><td colspan="2">'.
 	      $assignments .
 	      '</td></tr>'.
 	      '<tr><td align="right">'.get_string ('group').': </td><td>' .
@@ -113,10 +113,15 @@ class block_assignment_downloader extends block_base
 
     $choices = array ();
     foreach ($assignments as $curr)
-      $choices["{$curr->id}"] = $curr->name;
+      $choices["{$curr->id}"] =
+      strlen ($curr->name) > 20 ?
+      substr ($curr->name, 0, 20) . "..." :
+      $curr->name;
     
     return choose_from_menu ($choices, 'assignment_id',
-			     '', '', '', 0, true);	  
+			     '', '', '', 0, true,
+			     false, null, null,
+			     false);	  
   }
 
   function _get_group_chooser ()

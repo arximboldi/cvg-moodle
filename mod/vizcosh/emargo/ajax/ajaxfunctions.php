@@ -33,35 +33,35 @@ function ajax_Marker_loadMarkedText ()
     ajaxReply(601, get_string ('wrong_param', 'vizcosh'));
   else
     {
-    if ($all_paragraphs_array->_numOfRows > 0)
-      {
-	#contains paragraphs, now convert to an array and renumber index
-	$all_paragraphs_array = array_values(recordset_to_array($all_paragraphs_array));
+      if ($all_paragraphs_array->_numOfRows > 0)
+	{
+	  #contains paragraphs, now convert to an array and renumber index
+	  $all_paragraphs_array = array_values(recordset_to_array($all_paragraphs_array));
 	
-	#highlight markings
-	Marker::markTextForUser($all_paragraphs_array, $chapterid, $USER->id);
-	$markedContent = getWrappingHtmlCode($chapter->title, $all_paragraphs_array);	
-      }
-    else
-      {
-	//contains no paragraphs
+	  #highlight markings
+	  Marker::markTextForUser($all_paragraphs_array, $chapterid, $USER->id);
+	  $markedContent = getWrappingHtmlCode($chapter->title, $all_paragraphs_array);	
+	}
+      else
+	{
+	  //contains no paragraphs
 	
-	$markedContent = '<div id="contentblock_0">'.get_string ('no_content', 'vizcosh');
-	if (isset($USER->editing) && ($USER->editing==1))
-	  {
-	    $markedContent .=
-	      '<br><br><a title="'.get_string('edit').
-	      '" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.
-	      '&paragraphid=-1&orderposition=1">'.
-	      '<img src="pix/add.gif" height="11" class="iconsmall" alt="'.
-	      get_string('edit').'" />'.get_string ('add_paragraph', 'vizcosh').'</a>';
-	  }
-	else
-	  {
-	  $markedContent .=
-	    get_string ('change_to_edit_mode', 'vizcosh') .'</div>';	  
-	  }
-      }
+	  $markedContent = '<div id="contentblock_0">'.get_string ('no_content', 'vizcosh');
+	  if (isset($USER->editing) && ($USER->editing==1))
+	    {
+	      $markedContent .=
+		'<br><br><a title="'.get_string('edit').
+		'" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.
+		'&paragraphid=-1&orderposition=1">'.
+		'<img src="pix/add.gif" height="11" class="iconsmall" alt="'.
+		get_string('edit').'" />'.get_string ('add_paragraph', 'vizcosh').'</a>';
+	    }
+	  else
+	    {
+	      $markedContent .=
+		get_string ('change_to_edit_mode', 'vizcosh') .'</div>';	  
+	    }
+	}
     }		
 
   $content = vizcosh_post_process_content_emargo ($markedContent);
@@ -144,7 +144,7 @@ function ajax_Marker_loadJsxaalAnims()
 	  $all_paragraphs_array = array_values(recordset_to_array($all_paragraphs_array));
 	  
 	  $Content = getWrappingHtmlCode($chapter->title, $all_paragraphs_array);
-      }
+	}
     }
 
   $content = vizcosh_create_jsxaal_command ($Content);
@@ -531,55 +531,122 @@ function getWrappingHtmlCode($title, $paragraphsArray) {
 
   // print all paragraphs
   //$paragraphsArray enthält alle Absätze
-  for($i=0; $i<count($paragraphsArray); $i++) {
-    //$currentParagraph enthält den kompletten Absatz
-    $currentParagraph = $paragraphsArray[$i]->content;
-    $comment_count = emargo_get_comment_counter($chapterid, $paragraphsArray[$i]->id, 0, false);
-    $unread_comment_count = emargo_get_comment_counter($chapterid, $paragraphsArray[$i]->id, 0, true);
-    $private_note_count = emargo_get_comment_counter($chapterid, $paragraphsArray[$i]->id, 1, false);
-    $paragraph_is_bookmarked = emargo_paragraph_is_bookmarked($chapterid, $paragraphsArray[$i]->id);
-    $paragraph_is_questionmarked = emargo_paragraph_is_questionmarked($chapterid, $paragraphsArray[$i]->id);
-    $questionmark_count = emargo_count_questionmarks($chapterid, $paragraphsArray[$i]->id);
-    $questionmark_fontsize = (($questionmark_count > 9) ? 9 : $questionmark_count);
+  for($i=0; $i<count($paragraphsArray); $i++)
+    {
+      //$currentParagraph enthält den kompletten Absatz
+      $currentParagraph = $paragraphsArray[$i]->content;
+      $comment_count =
+	emargo_get_comment_counter ($chapterid, $paragraphsArray[$i]->id, 0, false);
+      $unread_comment_count =
+	emargo_get_comment_counter ($chapterid, $paragraphsArray[$i]->id, 0, true);
+      $private_note_count =
+	emargo_get_comment_counter ($chapterid, $paragraphsArray[$i]->id, 1, false);
+      $paragraph_is_bookmarked =
+	emargo_paragraph_is_bookmarked ($chapterid, $paragraphsArray[$i]->id);
+      $paragraph_is_questionmarked =
+	emargo_paragraph_is_questionmarked ($chapterid, $paragraphsArray[$i]->id);
+      $questionmark_count =
+	emargo_count_questionmarks ($chapterid, $paragraphsArray[$i]->id);
+      $questionmark_fontsize = (($questionmark_count > 9) ? 9 : $questionmark_count);
 
-    $paragraphinfo = $comment_count . ' ' . get_string("comments", 'vizcosh') . ', ' . $unread_comment_count . ' ' . get_string("unread", 'vizcosh') . ' ' . get_string("and", 'vizcosh') . ' ' . $private_note_count  .' ' . get_string("notes", 'vizcosh')  . ' ' . get_string("on_paragraph", 'vizcosh') . ' ' . ($i + 1);
+      $paragraphinfo =
+	$comment_count . ' ' . get_string("comments", 'vizcosh') . ', ' .
+	$unread_comment_count . ' ' . get_string("unread", 'vizcosh') . ' ' .
+	get_string("and", 'vizcosh') . ' ' .
+	$private_note_count  .' ' . get_string("notes", 'vizcosh')  . ' ' .
+	get_string("on_paragraph", 'vizcosh') . ' ' . ($i + 1);
     
-    $content .= '
-		<div title="' . ($i + 1) . '" id="contentblock_' . $paragraphsArray[$i]->id . '" onmouseover="javascript:toggleParagraphIcons(' . ($i + 1) . ');" onmouseout="javascript:toggleParagraphIcons(' . ($i + 1) . ');">
-			<a name="' . $paragraphsArray[$i]->id . '"></a>
-			<div class="icons">
-				<a title="' . $paragraphinfo . '" href="#' . $paragraphsArray[$i]->id .  '"><img class="paragraph_read" id="para-' . ($i + 1) . '_id-'. $paragraphsArray[$i]->id.'" src="' . $emargoroot . '/pix/buttons/discuss_paragraph_big.png" border="0" onmouseover="this.src=\'' . $emargoroot . '/pix/buttons/discuss_paragraph_big_hover.png\'" onmouseout="this.src=\'' . $emargoroot . '/pix/buttons/discuss_paragraph_big.png\'" /></a>';
+      $content .= '<div title="' . ($i + 1) . '" id="contentblock_' . $paragraphsArray[$i]->id . '"'.
+	' onmouseover="javascript:toggleParagraphIcons(' . ($i + 1) . ');"'.
+	' onmouseout="javascript:toggleParagraphIcons(' . ($i + 1) . ');"> '.
+	' <a name="' . $paragraphsArray[$i]->id . '"></a> '.
+	'<div class="icons"> '.
+	'<a title="' . $paragraphinfo . '" href="#' . $paragraphsArray[$i]->id .  '">'.
+	'<img class="paragraph_read" id="para-' . ($i + 1) . '_id-'. $paragraphsArray[$i]->id.'" '.
+	'src="' . $emargoroot . '/pix/buttons/discuss_paragraph_big.png" border="0" '.
+	'onmouseover="this.src=\'' . $emargoroot . '/pix/buttons/discuss_paragraph_big_hover.png\'" '.
+	'onmouseout="this.src=\'' . $emargoroot . '/pix/buttons/discuss_paragraph_big.png\'" /></a>';
     
-    if ($unread_comment_count > 0)
-      $ImgPostfix = "new";
-    else
-      $ImgPostfix = "all";
+      if ($unread_comment_count > 0)
+	$ImgPostfix = "new";
+      else
+	$ImgPostfix = "all";
     
-    $content .= '<div title="' . $paragraphinfo . '"><font size=1>' . $comment_count . '<img src="' . $emargoroot . '/pix/buttons/discuss_paragraph_'.$ImgPostfix.'.png" border="0" align=top>&nbsp;'.$private_note_count.'<img src="' . $emargoroot . '/pix/buttons/discuss_paragraph_private.png" border="0" align=top></font></div>';
+      $content .= '<div title="' . $paragraphinfo . '"><font size=1>' . $comment_count .
+	'<img src="' . $emargoroot . '/pix/buttons/discuss_paragraph_'.$ImgPostfix.'.png" '.
+	'border="0" align=top>&nbsp;'.
+	$private_note_count.
+	'<img src="' . $emargoroot . '/pix/buttons/discuss_paragraph_private.png" '.
+	'border="0" align=top></font></div>';
     
-    #Manages the display of bookmarks
-    $content .= '<div ' . ($paragraph_is_bookmarked ? '' : 'class="bookmark-hidden" id="bookmark-' . ($i+1) . '"') . '><a title="' . ($paragraph_is_bookmarked ? get_string("remove_bookmark_from_paragraph", 'vizcosh') : get_string("set_bookmark_on_paragraph", 'vizcosh') )  . ' ' . ($i+1) .  '" href="javascript:' . ($paragraph_is_bookmarked ? 'delete' : 'save') . 'Bookmark(' . $paragraphsArray[$i]->id . ');"><img onmouseover="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' . (!$paragraph_is_bookmarked ? '' : '_gray') . '.png\'" onmouseout="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' . ($paragraph_is_bookmarked ? '' : '_gray') . '.png\'" src="' . $emargoroot . '/pix/buttons/bookmark' . ($paragraph_is_bookmarked ? '' : '_gray') . '.png" class="bookmarkimg" border="0" /></a></div>';
+      #Manages the display of bookmarks
+      $content .=
+	'<div ' . ($paragraph_is_bookmarked ?
+		   '' :
+		   'class="bookmark-hidden" id="bookmark-' . ($i+1) . '"') . '>'.
+	'<a title="' .
+	($paragraph_is_bookmarked ?
+	 get_string("remove_bookmark_from_paragraph", 'vizcosh') :
+	 get_string("set_bookmark_on_paragraph", 'vizcosh') )  .
+	' ' . ($i+1) .  '" href="javascript:' . ($paragraph_is_bookmarked ?
+						 'delete' :
+						 'save') .
+	'Bookmark(' . $paragraphsArray[$i]->id . ');">'.
+	'<img onmouseover="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' .
+	(!$paragraph_is_bookmarked ? '' : '_gray') . '.png\'" '.
+	'onmouseout="this.src=\'' . $emargoroot . '/pix/buttons/bookmark' .
+	($paragraph_is_bookmarked ? '' : '_gray') . '.png\'" '.
+	'src="' . $emargoroot . '/pix/buttons/bookmark' .
+	($paragraph_is_bookmarked ? '' : '_gray') . '.png" class="bookmarkimg" border="0" /></a></div>';
     
-    #Manages the display of the questionmarks, (used to mark a parapgraph as difficult to understand)
-    #Todo: Muss ($i+1) auch durch $paragraphsArray[$i]->id ersetzt werden? Was bewirkt die id="questionmark-n"? analog Zeile 429
-    $content .= '<div ' . ($paragraph_is_questionmarked ? 'class="questionmark" id="questionmark-' . ($i+1) . '"' : 'class="questionmark-hidden" id="questionmark-hidden' . ($i+1) . '"') . ' style="font-size:1.' . $questionmark_fontsize . 'em;"><a title="' . ($paragraph_is_questionmarked ? get_string("remove_questionmark", 'vizcosh') : get_string("set_questionmark", 'vizcosh') )  . '" href="javascript:' . ($paragraph_is_questionmarked ? 'delete' : 'save') . 'Questionmark(' . $paragraphsArray[$i]->id . ');">?</a></div></div></div>';
+      #Manages the display of the questionmarks, (used to mark a parapgraph as difficult to understand)
+      #Todo: Muss ($i+1) auch durch $paragraphsArray[$i]->id ersetzt werden? Was bewirkt die id="questionmark-n"? analog Zeile 429
+      $content .= '<div ' . ($paragraph_is_questionmarked ? 'class="questionmark" id="questionmark-' . ($i+1) . '"' : 'class="questionmark-hidden" id="questionmark-hidden' . ($i+1) . '"') . ' style="font-size:1.' . $questionmark_fontsize . 'em;"><a title="' . ($paragraph_is_questionmarked ? get_string("remove_questionmark", 'vizcosh') : get_string("set_questionmark", 'vizcosh') )  . '" href="javascript:' . ($paragraph_is_questionmarked ? 'delete' : 'save') . 'Questionmark(' . $paragraphsArray[$i]->id . ');">?</a></div></div></div>';
     
-    $content .= '<div class="paragraph_number">';
+      $content .= '<div class="paragraph_number">';
 
-    if (isset($USER->editing) && ($USER->editing==1)){
-      //Todo Durch Ajax Drag and Drop ersetzen
-      $content .= '<div><a href="moveparagraph.php?id='.$cm->id.'&chapterid='.$chapterid.'&position='.($i+1).'&paragraphid='.$paragraphsArray[$i]->id.'&moveup=1&sesskey='.$USER->sesskey.'"><img src="'.$CFG->pixpath.'/t/up.gif" height="11" class="iconsmall" alt="' . get_string('up') . '" /></a><br><a href="moveparagraph.php?id='.$cm->id.'&chapterid='.$chapterid.'&position='.($i+1).'&paragraphid='.$paragraphsArray[$i]->id.'&moveup=0&sesskey='.$USER->sesskey.'"><img src="'.$CFG->pixpath.'/t/down.gif" height="11" class="iconsmall" alt="' . get_string('down') . '" /></a><br>';
-      
-      #edit, add and remove paragraphs (symbols)
-      $content .= '<a title="'.get_string('edit').'" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.'&paragraphid='.$paragraphsArray[$i]->id.'&orderposition='.$paragraphsArray[$i]->orderposition.'"><img src="'.$CFG->pixpath.'/t/edit.gif" height="11" class="iconsmall" alt="'.get_string('edit').'" /></a><br><a title="'.get_string('addafter', 'vizcosh').'" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.'&paragraphid=-1&orderposition='.$paragraphsArray[$i]->orderposition.'"><img src="pix/add.gif" height="11" class="iconsmall" alt="'.get_string('addafter', 'vizcosh').'" /></a><br><a title="'.get_string('delete').'" href="deleteparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.'&paragraphid='.$paragraphsArray[$i]->id.'&amp;sesskey='.$USER->sesskey.'"><img src="'.$CFG->pixpath.'/t/delete.gif" height="11" class="iconsmall" alt="'.get_string('delete').'" /></a></div>';
-    }
+      if (isset($USER->editing) && ($USER->editing==1))
+	{
+	  //Todo Durch Ajax Drag and Drop ersetzen
+	  $content .=
+	    '<div>'.
+
+	    '<a href="moveparagraph.php?id='.$cm->id.'&chapterid='.$chapterid.
+	    '&position='.($i+1).'&paragraphid='.$paragraphsArray[$i]->id.
+	    '&moveup=1&merge=0&sesskey='.$USER->sesskey.'">'.
+	    '<img src="'.$CFG->pixpath.'/t/up.gif" height="11" class="iconsmall" '.
+	    'alt="' . get_string('move_up') . '" /></a><br>'.
+
+	    '<a href="moveparagraph.php?id='.$cm->id.'&chapterid='.$chapterid.
+	    '&position='.($i+1).'&paragraphid='.$paragraphsArray[$i]->id.
+	    '&moveup=1&merge=1&sesskey='.$USER->sesskey.'">'.
+	    '<img src="'.$CFG->pixpath.'/t/moveleft.gif" height="11" class="iconsmall" '.
+	    'alt="' . get_string('merge_up') . '" /></a><br>'.
+
+	    '<a href="moveparagraph.php?id='.$cm->id.'&chapterid='.$chapterid.
+	    '&position='.($i+1).'&paragraphid='.$paragraphsArray[$i]->id.
+	    '&moveup=0&merge=1&sesskey='.$USER->sesskey.'">'.
+	    '<img src="'.$CFG->pixpath.'/t/removeright.gif" height="11" class="iconsmall" '.
+	    'alt="' . get_string('merge_down') . '" /></a><br>'.
+
+	    '<a href="moveparagraph.php?id='.$cm->id.'&chapterid='.$chapterid.
+	    '&position='.($i+1).'&paragraphid='.$paragraphsArray[$i]->id.
+	    '&moveup=0&merge=0sesskey='.$USER->sesskey.'">'.
+	    '<img src="'.$CFG->pixpath.'/t/down.gif" height="11" class="iconsmall" '.
+	    'alt="' . get_string('move_down') . '" /></a><br>';
+
+	  
+	  #edit, add and remove paragraphs (symbols)
+	  $content .=
+	    '<a title="'.get_string('edit').'" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.'&paragraphid='.$paragraphsArray[$i]->id.'&orderposition='.$paragraphsArray[$i]->orderposition.'"><img src="'.$CFG->pixpath.'/t/edit.gif" height="11" class="iconsmall" alt="'.get_string('edit').'" /></a><br><a title="'.get_string('addafter', 'vizcosh').'" href="editparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.'&paragraphid=-1&orderposition='.$paragraphsArray[$i]->orderposition.'"><img src="pix/add.gif" height="11" class="iconsmall" alt="'.get_string('addafter', 'vizcosh').'" /></a><br><a title="'.get_string('delete').'" href="deleteparagraph.php?id='.$cm->id.'&amp;chapterid='.$chapterid.'&paragraphid='.$paragraphsArray[$i]->id.'&amp;sesskey='.$USER->sesskey.'"><img src="'.$CFG->pixpath.'/t/delete.gif" height="11" class="iconsmall" alt="'.get_string('delete').'" /></a></div>';
+	}
     
-    #This is the DIV-Class where the paragraphs content is displayed
-    #This displays the left paragraph numbers
-    $content .= '</div>	
-			<div id="'.$paragraphsArray[$i]->id.'" class="cbcontent" onmouseout="Marker.disable();" onmouseover="Marker.enable();" onmouseup="markText(this.id);">' . $currentParagraph . '<div style="font-size: 0.6em; float: right; vertical-align: bottom;"><a target="_self" href="#' . $paragraphsArray[$i]->id . '" id="paragraph_number_' . ($i + 1) . '">('.($i + 1) . ')</a></div></div>' . (($i != count($paragraphsArray) -1) ? '<br />' : '') . '
+      #This is the DIV-Class where the paragraphs content is displayed
+      #This displays the left paragraph numbers
+      $content .= '</div>'.	
+	'<div id="'.$paragraphsArray[$i]->id.'" class="cbcontent" onmouseout="Marker.disable();" onmouseover="Marker.enable();" onmouseup="markText(this.id);">' . $currentParagraph . '<div style="font-size: 0.6em; float: right; vertical-align: bottom;"><a target="_self" href="#' . $paragraphsArray[$i]->id . '" id="paragraph_number_' . ($i + 1) . '">('.($i + 1) . ')</a></div></div>' . (($i != count($paragraphsArray) -1) ? '<br />' : '') . '
 		</div><div style="clear:both;"></div>';
-  }	
+    }	
   
   return $content;
 }
