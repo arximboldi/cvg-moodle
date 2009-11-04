@@ -1,3 +1,16 @@
+2009-11-04  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* addformat.php, editorformat.*, editorviz.php, db/install.xml:
+	Added support to anotate the format with the version. This is
+	needed to maintain different animal versions (as they have
+	incompatible bugs) because they require the name to be fixed to
+	the mime type... Which is btw something undocument and bad also...
+
+2009-10-20  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* view.php, moveparagraph.php, ...: Added support for merging two
+	paragraphs into one in a fast but easy way.
+
 2009-10-15  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* lang/es_utf8/vizcosh.php: Added more translations.

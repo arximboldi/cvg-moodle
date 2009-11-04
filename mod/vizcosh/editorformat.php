@@ -87,7 +87,8 @@ if (($form = data_submitted()) && confirm_sesskey())
 	$format->jnlp_template = $form->template;
       }
     
-    //optional field: extension
+    //optional field: version, extension
+    $format->version   = $form->version;
     $format->extension = $form->extension;
     
     //if user wants to load one of the available jnlp templates into
@@ -168,6 +169,7 @@ if ($modus == 'delete' && $vizcosh)
 if (!$format)
   {
     $format->name = '';
+    $format->version = '';
     $format->extension = '';
     $format->author = '';
     $format->jnlp_template = '';

@@ -68,7 +68,8 @@ if ($paragraph)
       {
 	$move_to_paragraph->content .=
 	  $paragraph->content;
-		
+
+	$move_to_paragraph->content = addslashes ($move_to_paragraph->content);
 	update_record ('vizcosh_paragraphs', $move_to_paragraph);
 	delete_records ('vizcosh_paragraphs', 'id', $paragraph->id);
       }

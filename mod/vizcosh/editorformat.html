@@ -21,6 +21,14 @@ from editorformat.php:
   </tr>
   <tr valign="top">
     <td align="right">
+      <?php print_string("formatversion", "vizcosh") ?>:
+    </td>
+    <td align="left">
+      <input type="text" name="version" size="30" value="<?php p($format->version) ?>">
+    </td>
+  </tr>
+  <tr valign="top">
+    <td align="right">
       <?php print_string("formatextension", "vizcosh") ?>:
     </td>
     <td align="left">

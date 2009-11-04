@@ -61,7 +61,7 @@
 	      foreach ($formats as $format)
 	        {
 	          $selected = $vizalgo->format == $format->id ? 'selected' : '';
-	          echo "<option $selected value='$format->id'>$format->name</option>";
+	          echo "<option $selected value='$format->id'>$format->name ($format->version)</option>";
 	        }
 	      echo '</select>';
 	    }
