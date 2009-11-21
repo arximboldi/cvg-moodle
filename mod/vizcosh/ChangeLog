@@ -1,3 +1,13 @@
+2009-11-21  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* restorelib.php, backuplib.php: Added storing/restoring support.
+
+	* DESIGN-ISSUES: Added some angry notes about the app design ;)
+
+2009-11-05  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
+
+	* addformat.php: Added a back button.
+
 2009-11-04  Juan Pedro Bolivar Puente  <raskolnikov@es.gnu.org>
 
 	* addformat.php, editorformat.*, editorviz.php, db/install.xml:

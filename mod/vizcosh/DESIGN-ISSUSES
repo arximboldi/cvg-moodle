@@ -1,0 +1,24 @@
+
+Author: Juan Pedro Bolívar Puente 
+
+The current design of Vizcosh has a flaw that goes against the Moodle
+system: the Vizcosh, being an a activity module, creates multi-course
+data. This is a big problem when exporting the course, and very dirty
+hacks had to be made to workarround this problem.
+
+The best solution, from my personal point of view, is to completely
+get rid of the vizcosh_vizalgos and vizcosh_formats tables, that only
+create problems and the corresponding editing forms are by no means
+intuitives, specially the format editor.
+
+The we can easily get rid of the vizcosh_vizalgos using the local
+course storage to store the files. Then, then, we can use the 'filter'
+aproximation that we used for the XAAL algorithms to inser the
+vizalgos, or even just include a link, that can be wrapped by the user
+into an image or whaever he feels like if he wants to have a preview
+or something.
+
+The formats, as they are not user-friendly to edit at all, can be
+provided in any way by the means of "plugins" made of PHP functions
+(simple ones, that can be even edited by non-programmers!) stored in
+$VIZCOSH_ROOTS/formats.

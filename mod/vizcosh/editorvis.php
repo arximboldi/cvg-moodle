@@ -54,7 +54,9 @@ if (!$vizcosh = get_record('vizcosh', 'id', $cm->instance))
 
 // get algorithm visualization from database
 if (isset ($vizalgoid) && $vizalgoid != -1)
-  $vizalgo = get_record ('vizcosh_vizalgos', 'id', $vizalgoid);
+  {
+    $vizalgo = get_record ('vizcosh_vizalgos', 'id', $vizalgoid);
+  }
 
 // used for redirecting if errors occur
 $errorurl1 = 'editorvis.php?vizalgo=' . $vizalgoid . '&modus=' . $modus;

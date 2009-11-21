@@ -121,6 +121,14 @@ print_heading_with_help($pageheading, 'addformathelp', 'vizcosh');
 print_simple_box_start('center', '');
 print_tabs($tabs, 'list', $inactive, $activated);    
 print_table($table);
+
+echo '<div align="center">';
+print_single_button ('editorvis.php',
+		     array('vizalgo' => $tempvizalgoid,
+			   'modus' => $tempmodus),
+		     get_string ('back'));
+echo '<div>';
+
 print_simple_box_end();
 print_footer($course);
 ?>
