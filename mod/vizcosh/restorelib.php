@@ -192,7 +192,7 @@ function vizcosh_vizalgos_restore ($old_vizcosh_id,
       //The structure is equal to the db, so insert the vizcosh_vizalgos
       if ($record = get_record ('vizcosh_vizalgos',
 				'title', $vizalgo->title,
-				'description', $vizalgo->description,
+				'course', $vizalgo->course,
 				'date', $vizalgo->date))
 	$newid = $record->id;
       else
