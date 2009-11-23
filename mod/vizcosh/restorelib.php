@@ -180,10 +180,10 @@ function vizcosh_vizalgos_restore ($old_vizcosh_id,
 	addslashes (base64_decode (backup_todb($sub_info['#']['DATA']['0']['#'])));
       $vizalgo->fndata = backup_todb($sub_info['#']['FNDATA']['0']['#']);
       $vizalgo->format =
-	backup_getid ($restore->backup_unique_cde,
+	backup_getid ($restore->backup_unique_code,
 		      'vizcosh_vizalgo_formats',
 		      backup_todb ($sub_info['#']['FORMAT']['0']['#']));
-      $vizalgo->format = $vizalgo->format->id;
+      $vizalgo->format = $vizalgo->format->newid;
       $vizalgo->thumbnail =
 	addslashes (base64_decode (backup_todb($sub_info['#']['THUMBNAIL']['0']['#'])));
       $vizalgo->fnthumbnail = backup_todb($sub_info['#']['FNTHUMBNAIL']['0']['#']);
