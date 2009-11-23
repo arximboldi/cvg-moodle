@@ -253,8 +253,8 @@ function emargo_print_commentbox ($cmid, $module, $paragraphs,
 	      if (!$private == 1 &&
 		  isset($threaded_comments[0]) &&
 		  is_array($threaded_comments[0]))
-		foreach($threaded_comments[0] as $c)
-		  $content .= emargo_print_comment(&$c);
+		foreach ($threaded_comments[0] as $c)
+		  $content .= emargo_print_comment ($c);
 	    }
 	}
     }
