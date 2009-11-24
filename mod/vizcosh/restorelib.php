@@ -183,7 +183,7 @@ function vizcosh_vizalgos_restore ($old_vizcosh_id,
 	backup_getid ($restore->backup_unique_code,
 		      'vizcosh_vizalgo_formats',
 		      backup_todb ($sub_info['#']['FORMAT']['0']['#']));
-      $vizalgo->format = $vizalgo->format->newid;
+      $vizalgo->format = $vizalgo->format->new_id;
       $vizalgo->thumbnail =
 	addslashes (base64_decode (backup_todb($sub_info['#']['THUMBNAIL']['0']['#'])));
       $vizalgo->fnthumbnail = backup_todb($sub_info['#']['FNTHUMBNAIL']['0']['#']);
