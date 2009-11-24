@@ -22,7 +22,7 @@
     $texexp = str_replace('formdata=','',$texexp);
 
     if ($texexp) {
-        $image  = md5($texexp) . ".gif";
+        $image  = md5($texexp) . ".png";
         $filetype = 'image/gif';
         if (!file_exists("$CFG->dataroot/filter/tex")) {
             make_upload_directory("filter/tex");

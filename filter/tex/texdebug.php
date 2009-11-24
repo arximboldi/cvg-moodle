@@ -217,7 +217,7 @@
         $tex = "$latex->temp_dir/$md5.tex";
         $dvi = "$latex->temp_dir/$md5.dvi";
         $ps = "$latex->temp_dir/$md5.ps";
-        $gif = "$latex->temp_dir/$md5.gif";
+        $gif = "$latex->temp_dir/$md5.png";
 
         // put the expression as a file into the temp area
         $expression = stripslashes($expression);

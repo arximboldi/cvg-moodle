@@ -106,7 +106,7 @@
             $tex = "{$this->temp_dir}/$filename.tex";
             $dvi = "{$this->temp_dir}/$filename.dvi";
             $ps  = "{$this->temp_dir}/$filename.ps";
-            $gif = "{$this->temp_dir}/$filename.gif";
+            $gif = "{$this->temp_dir}/$filename.png";
 
             // turn the latex doc into a .tex file in the temp area
             $fh = fopen( $tex, 'w' );
@@ -149,7 +149,7 @@
             unlink( "{$this->temp_dir}/$filename.tex" );
             unlink( "{$this->temp_dir}/$filename.dvi" );
             unlink( "{$this->temp_dir}/$filename.ps" );
-            unlink( "{$this->temp_dir}/$filename.gif" );
+            unlink( "{$this->temp_dir}/$filename.png" );
             unlink( "{$this->temp_dir}/$filename.aux" );
             unlink( "{$this->temp_dir}/$filename.log" );
             return;

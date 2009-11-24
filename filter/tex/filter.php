@@ -165,7 +165,7 @@ function tex_filter ($courseid, $text) {
             $texcache->timemodified = time();
             insert_record("cache_filters",$texcache, false);
         }
-        $filename = $md5 . ".gif";
+        $filename = $md5 . ".png";
         $text = str_replace( $matches[0][$i], string_file_picture_tex($filename, $texexp, '', '', $align, $alt), $text);
     }
     return $text;
