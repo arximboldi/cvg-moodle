@@ -1,7 +1,7 @@
 <?php
 
   /**
-   *  Time-stamp:  <2009-07-22 13:36:40 raskolnikov>
+   *  Time-stamp:  <2010-02-20 01:12:52 raskolnikov>
    *
    *  @file        download.php
    *  @author      Juan Pedro Bolívar Puente <raskolnikov@es.gnu.org>
@@ -163,6 +163,7 @@ function assignment_downloader_add_group_files ($srcdir, $dstdir, $archive, $ass
 				 $comment->submissioncomment);
 
 	  $user_files = array_diff (scandir ($srcuserdir), array ('.', '..'));
+	  $compress_files = array ();
 	  foreach ($user_files as $uf)
 	    $compress_files[] = $srcuserdir .'/'. $uf;
 

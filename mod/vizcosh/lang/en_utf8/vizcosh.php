@@ -1,7 +1,7 @@
 <?php 
 
-$string['modulename'] = 'eMargoV2.0';
-$string['modulenameplural'] = 'eMargoV2.0';
+$string['modulename'] = 'Vizcosh';
+$string['modulenameplural'] = 'Vizcosh';
 
 $string['toc'] = 'Table of Contents';
 $string['tocwidth'] = 'Select width of the Table of Contents for all eMargoV2.0.';
@@ -10,7 +10,7 @@ $string['commentboxheight'] = 'Select height of the eMargo comment box for all e
 $string['tocformat'] = 'Should the Table of Contens (TOC) be displayed as HTML list or as a selectbox?';
 $string['tocformat_list'] = 'List';
 $string['tocformat_selectbox'] = 'Selectbox';
-$string['faq'] = 'eMargoV2.0 Help/FAQ';
+$string['faq'] = 'Vizcosh Help/FAQ';
 $string['select_chapter'] = 'Select chapter';
 $string['enablegroupfunction'] = 'Use as group eMargo';
 $string['disableprinting'] = 'Disable printing';

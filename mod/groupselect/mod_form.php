@@ -38,15 +38,16 @@ class mod_groupselect_mod_form extends moodleform_mod {
 	/* Set max members per group */
 	$mform->addElement('header', '', get_string('maxmembers', 'groupselect'), array ());
 	$allgroups = groups_get_all_groups ($COURSE->id);
-	foreach ($allgroups as $grp)
-	  {
-	    $element = "maxmembers_{$grp->id}";
-	    $mform->addElement('text', $element,
-			       get_string('maxmembers_group', 'groupselect', $grp->name),
-			       array('size'=>'4'));
-	    $mform->setType($element, PARAM_INT);
-	    $mform->setDefault($element, 0);
-	  }
+	if ($allgroups)
+	  foreach ($allgroups as $grp)
+	    {
+	      $element = "maxmembers_{$grp->id}";
+	      $mform->addElement('text', $element,
+				 get_string('maxmembers_group', 'groupselect', $grp->name),
+				 array('size'=>'4'));
+	      $mform->setType($element, PARAM_INT);
+	      $mform->setDefault($element, 0);
+	    }
 	
         $features = array('groups'=>true, 'groupings'=>true, 'groupmembersonly'=>true,
                           'outcomes'=>false, 'gradecat'=>false, 'idnumber'=>false);
