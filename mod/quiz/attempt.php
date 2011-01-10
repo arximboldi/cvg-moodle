@@ -94,6 +94,11 @@
         print_error("subneterror", "quiz", "view.php?id=$cm->id");
     }
 
+/// Check useragent access
+if (!$ispreviewing && !empty($quiz->useragent) && !preg_match('/'.$quiz->useragent.'/', $_SERVER['HTTP_USER_AGENT'])) {
+        print_error("useragenterror", "quiz", "view.php?id=$cm->id");
+    }
+
 /// Check password access
     if ($ispreviewing && $forcenew) {
         unset($SESSION->passwordcheckedquizzes[$quiz->id]);

@@ -43,6 +43,9 @@
     if (!isset($form->subnet)) {
         $form->subnet = $CFG->quiz_subnet;
     }
+    if (!isset($form->useragent)) {
+        $form->useragent = $CFG->quiz_useragent;
+    }
     if (!isset($form->timelimit)) {
         $form->timelimit = $CFG->quiz_timelimit;
     }
@@ -356,6 +359,17 @@
   </td>
 </tr>
 
+<tr valign="top">
+  <td align="right"><b><?php print_string("requireuseragent", "quiz") ?>:</b></td>
+  <td>
+    <input type="text" name="useragent" size="20" value="<?php p($form->useragent) ?>" />
+    <?php helpbutton("requireuseragent", get_string("requireuseragent", "quiz"), "quiz"); ?>
+  </td>
+  <td align="center">
+    <input type="hidden" name="fix_useragent" value="0" />
+    <input type="checkbox" name="fix_useragent" value="1" <?php echo $CFG->quiz_fix_useragent ? 'checked="checked"' : ''; ?> />
+  </td>
+</tr>
 
 <tr valign="top">
   <td align="right"><b><?php print_string("maximumgrade") ?>:</b></td>

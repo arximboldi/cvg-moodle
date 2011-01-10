@@ -265,6 +265,7 @@
         fwrite ($bf,full_tag("TIMELIMIT",4,false,$quiz->timelimit));
         fwrite ($bf,full_tag("PASSWORD",4,false,$quiz->password));
         fwrite ($bf,full_tag("SUBNET",4,false,$quiz->subnet));
+        fwrite ($bf,full_tag("USERAGENT",4,false,$quiz->useragent));
         fwrite ($bf,full_tag("POPUP",4,false,$quiz->popup));
         fwrite ($bf,full_tag("DELAY1",4,false,$quiz->delay1));
         fwrite ($bf,full_tag("DELAY2",4,false,$quiz->delay2));

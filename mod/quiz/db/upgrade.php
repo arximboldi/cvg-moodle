@@ -83,6 +83,10 @@ function xmldb_quiz_upgrade($oldversion=0) {
                 (($CFG->quiz_review & QUIZ_REVIEW_FEEDBACK & QUIZ_REVIEW_CLOSED) << 12));
     }
 
+    if ($result && $oldversion < 2011011100) {
+        $result = $result && table_column("quiz", "", "useragent", "varchar", "1024", "", "", "not null", "");
+    }
+    
 //===== 1.9.0 upgrade line ======//
 
     return $result;

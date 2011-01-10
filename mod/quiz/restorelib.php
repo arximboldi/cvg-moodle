@@ -87,6 +87,7 @@
             $quiz->timelimit = backup_todb($info['MOD']['#']['TIMELIMIT']['0']['#']);
             $quiz->password = backup_todb($info['MOD']['#']['PASSWORD']['0']['#']);
             $quiz->subnet = backup_todb($info['MOD']['#']['SUBNET']['0']['#']);
+            $quiz->useragent = backup_todb($info['MOD']['#']['USERAGENT']['0']['#']);
             $quiz->popup = backup_todb($info['MOD']['#']['POPUP']['0']['#']);
             $quiz->delay1 = isset($info['MOD']['#']['DELAY1']['0']['#'])?backup_todb($info['MOD']['#']['DELAY1']['0']['#']):'';
             $quiz->delay2 = isset($info['MOD']['#']['DELAY2']['0']['#'])?backup_todb($info['MOD']['#']['DELAY2']['0']['#']):'';

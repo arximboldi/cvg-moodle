@@ -211,6 +211,12 @@ class mod_quiz_mod_form extends moodleform_mod {
         $mform->setAdvanced('subnet', $CFG->quiz_fix_subnet);
         $mform->setDefault('subnet', $CFG->quiz_subnet);
 
+        $mform->addElement('text', 'useragent', get_string("requireuseragent", "quiz"));
+        $mform->setType('useragent', PARAM_TEXT);
+        $mform->setHelpButton('useragent', array("requireuseragent", get_string("requireuseragent", "quiz"), "quiz"));
+        $mform->setAdvanced('useragent', $CFG->quiz_fix_useragent);
+        $mform->setDefault('useragent', $CFG->quiz_useragent);
+        
 //-------------------------------------------------------------------------------
         $features = new stdClass;
         $features->groups = true;

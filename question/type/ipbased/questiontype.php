@@ -202,9 +202,10 @@ class ipbased_qtype extends default_questiontype {
         
         $ipbasedeq = str_replace ('/*!*/', '$ip', $ipbasedeq);
         $ip = split('.', $_SERVER['REMOTE_ADDR']);
-        $index = eval ('return ' . $ipbasedeq . ';') % $total + 1;
+        $index = eval ('return ' . $ipbasedeq . ';') % $total;
 
-        $wrappedquestion = $this->catrandoms[$question->category][$question->questiontext][$index];
+        $wrappedquestion = array_values($this->catrandoms[$question->category][$question->questiontext]);
+        $wrappedquestion = $wrappedquestion[$index];
         
         $wrappedquestion = get_record('question', 'id', $wrappedquestion->id);
         $QTYPES[$wrappedquestion->qtype]->get_question_options($wrappedquestion);
