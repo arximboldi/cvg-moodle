@@ -80,7 +80,7 @@ function xmldb_quiz_upgrade($oldversion=0) {
         $result = $result && set_config('quiz_review', ($CFG->quiz_review & ~QUIZ_REVIEW_OVERALLFEEDBACK) |
                 (($CFG->quiz_review & QUIZ_REVIEW_FEEDBACK & QUIZ_REVIEW_IMMEDIATELY) << 16) |
                 (($CFG->quiz_review & QUIZ_REVIEW_FEEDBACK & QUIZ_REVIEW_OPEN) << 14) |
-                (($CFG->quiz_review & QUIZ_REVIEW_FEEDBACK & QUIZ_REVIEW_CLOSED) << 12));
+ç                (($CFG->quiz_review & QUIZ_REVIEW_FEEDBACK & QUIZ_REVIEW_CLOSED) << 12));
     }
 
     if ($result && $oldversion < 2011011100) {
